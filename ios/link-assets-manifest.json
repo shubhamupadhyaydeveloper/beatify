@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/OpenSans-Bold.ttf",
+      "sha1": "953814da1b753763dfa5a7ecc18bdbb14890e16b"
+    },
+    {
+      "path": "assets/fonts/OpenSans-ExtraBoldItalic.ttf",
+      "sha1": "e45774d6be6af8f5d6bc9af4e4c9e6b3f00b53c1"
+    },
+    {
+      "path": "assets/fonts/OpenSans-MediumItalic.ttf",
+      "sha1": "3ac7cf35a225574a0e1508d6df731b6ecdd5cf9b"
+    },
+    {
+      "path": "assets/fonts/RadioCanadaBig-Bold.ttf",
+      "sha1": "a402b091f9bbe563bd2320da6ff69c8c6787ad2f"
+    },
+    {
+      "path": "assets/fonts/RadioCanadaBig-Regular.ttf",
+      "sha1": "fc363978f062a32e774b794236f6050858cb5870"
+    }
+  ]
+}

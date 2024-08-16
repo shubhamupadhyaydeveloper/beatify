@@ -1,0 +1,6 @@
+export const homeImage = require("../../assets/homeimg.png")
+export const logo = require("../../assets/logo.png")
+export const greenHairMan = require("../../assets/signimg.png")
+export const googleIcon = require("../../assets/google.png")
+export const appleIcon = require("../../assets/apple.png")
+export const githubIcon = require("../../assets/github.png")

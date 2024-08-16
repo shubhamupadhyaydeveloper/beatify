@@ -11,6 +11,7 @@ module.exports = {
         alias: {
           tests: ['./tests/'],
           '@shared': './src/shared',
+          "@assets" : "./assets",
           "src" : "./src"
         },
       },
