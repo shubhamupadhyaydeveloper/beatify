@@ -2,7 +2,7 @@ import {z} from 'zod';
 
 export const SignInTypes = z.object({
   email: z.string().email('please enter vaild email'),
-  password: z.string().min(4, {message: 'atleast 4 digit is required'}),
+  password: z.string().min(6, {message: 'atleast 6 digit is required'}),
 });
 
 export const ResetPasswordTypes = z

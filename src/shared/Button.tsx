@@ -32,17 +32,14 @@ const SharedButton = ({
         width: btnWidth ?? width * 0.8,
         height: height * 0.07,
         borderRadius: radius ?? 15,
-        backgroundColor: bgColor ?? '#62CD5D',
+        backgroundColor: bgColor ?? '#21c856',
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {isSubmitting ? (
-        <ActivityIndicator color={textColor ?? 'white'} />
-      ) : (
-        <Text style={{ color: textColor ?? 'white', fontWeight: 'bold', fontSize: textSize ?? 17 }}>
-          {text}
+     <Text
+          style={{color: textColor ?? 'white', fontFamily: 'OpenSans-Bold'}}>
+          {isSubmitting ? <ActivityIndicator size="large" color="#fff" /> :  text}
         </Text>
-      )}
     </TouchableOpacity>
   );
 };

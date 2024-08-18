@@ -1,13 +1,13 @@
-import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
-import React, {useCallback, useMemo, useRef} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-type props = {
+type Props = {
   bottomSheetRef: React.RefObject<BottomSheet>;
   children: React.ReactNode;
 };
 
-const SharedModal = ({children, bottomSheetRef}: props) => {
+const SharedModal = ({ children, bottomSheetRef }: Props) => {
   const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   const renderBackdrop = useCallback(
@@ -27,8 +27,9 @@ const SharedModal = ({children, bottomSheetRef}: props) => {
       snapPoints={snapPoints}
       enablePanDownToClose={true}
       ref={bottomSheetRef}
-      index={-1}
-      handleIndicatorStyle={{display: 'none'}}>
+      index={-1} // Initially hidden
+      handleIndicatorStyle={{ display: 'none' }}
+    >
       {children}
     </BottomSheet>
   );
