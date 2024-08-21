@@ -6,96 +6,119 @@ import ActualHomepage from 'src/homepage/ActualHomepage';
 import Profile from 'src/homepage/Profile';
 import {BlurView} from '@react-native-community/blur';
 import EncytoIcon from 'react-native-vector-icons/Entypo';
-import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons"
-import IonIcons from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 import Create from 'src/homepage/Create';
 import Explore from 'src/homepage/Explore';
 import Library from 'src/homepage/Library';
-
+import HompageIndex from 'src/homepage/HompageIndex';
+import ExploreIndex from 'src/homepage/ExploreIndex';
+import LinearGradient from 'react-native-linear-gradient';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator<TabNavigationProps>();
 
+  function GradientTabBar() {
+    return (
+      <LinearGradient
+      colors={['transparent', 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.9)', 'rgba(0, 0, 0, 1)']}
+      style={{
+        position: 'absolute',
+        left: 0, 
+        right: 0,
+        top: 0,
+        height: '100%',
+      }}
+      >
+      </LinearGradient>
+    );
+  }
 
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        tabBarBackground: () => (
+          <GradientTabBar />
+        ),
         tabBarStyle: {
-          backgroundColor: '#343434',
-          height: 60,
-          paddingBottom : 5
+          position: 'absolute',
+          borderTopWidth: 0, // Remove the white line
+          elevation: 0, // Remove shadow on Android
+          shadowOpacity: 0,
+          height: 60, 
         },
         tabBarActiveTintColor: '#ffffff',
         tabBarLabelStyle: {
           fontFamily: 'RadioCanadaBig-Bold',
         },
-        tabBarIconStyle : {
-           marginTop : 5
+        tabBarIconStyle: {
+          marginTop: 10,
         },
-        
       }}>
       <Tab.Screen
         name="Home"
-        component={ActualHomepage}
+        component={HompageIndex}
         options={{
           headerShown: false,
           tabBarIcon: ({focused, color}) => (
-            <View className={focused ? `bg-[#21c856] w-[60px] items-center py-1 rounded-full` : ""}>
-              <MaterialCommunityIcon color={color} name={focused ? "home" : "home-outline"} size={25} />
+            <View
+           >
+              <MaterialCommunityIcon
+                color={color}
+                name={focused ? 'home' : 'home-outline'}
+                size={30}
+              />
             </View>
           ),
         }}
       />
-        <Tab.Screen
-          name="Search"
-          component={Explore}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({focused, color}) => (
-            <View className={focused ? `bg-[#21c856] w-[60px] items-center py-1 rounded-full` : ""}>
-              <IonIcons color={color} name="search" size={25} />
+      <Tab.Screen
+        name="Search"
+        component={ExploreIndex}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({focused, color}) => (
+            <View>
+              <IonIcons color={color} name="search" size={30} />
             </View>
-          ),}}
-        />
-        <Tab.Screen
-          name="Create"
-          component={Create}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({focused, color}) => (
-            <View className={focused ? `bg-[#21c856] w-[60px] items-center py-1 rounded-full` : ""}>
-              <IonIcons color={color} name={focused ? "add-circle" : "add-circle-outline"} size={25} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Create"
+        component={Create}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({focused, color}) => (
+            <View>
+              <IonIcons
+                color={color}
+                name={focused ? 'add-circle' : 'add-circle-outline'}
+                size={30}
+              />
             </View>
-          ),}}
-        />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Library"
         component={Library}
         options={{
           headerShown: false,
           tabBarIcon: ({focused, color}) => (
-          <View className={focused ? `bg-[#21c856] w-[60px] items-center py-1 rounded-full` : ""}>
-            <IonIcons color={color} name={focused ? "library" : "library-outline"} size={22} />
-          </View>
-        ),}}
+            <View>
+              <IonIcons
+                color={color}
+                name={focused ? 'library' : 'library-outline'}
+                size={27}
+              />
+            </View>
+          ),
+        }}
       />
     </Tab.Navigator>
   );
 };
 
 export default TabNavigation;
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    width: 60,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    backgroundColor: 'transparent', // Default background color (transparent)
-  },
-  iconContainerActive: {
-    backgroundColor: '#007BFF', // Background color for the active tab icon
-  },
-});

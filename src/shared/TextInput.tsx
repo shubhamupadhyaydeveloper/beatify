@@ -20,7 +20,9 @@ type props = {
   secureText?: boolean;
   keyboardType: KeyboardTypeOptions;
   errorText? : any;
-  inputWidth?: number
+  inputWidth?: number;
+  multiline?: boolean;
+  labelColor?: string
 };
 
 const {height} = Dimensions.get('window')
@@ -34,7 +36,9 @@ const SharedInput = ({
   secureText,
   keyboardType,
   errorText,
-  inputWidth
+  inputWidth,
+  multiline,
+  labelColor
 }: props) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const transformValue = useSharedValue(0);
@@ -69,12 +73,12 @@ const SharedInput = ({
   return (
     <Animated.View style={inputStyle}>
     <View style={{width : inputWidth}}>
-      <Text style={{fontFamily: 'RadioCanadaBig-Bold'}} className="text-[15px] mb-2 text-black">
+      <Text style={{fontFamily: 'RadioCanadaBig-Bold', color : labelColor ?? "#000000"}} className="text-[15px] mb-2 ">
         {label}
       </Text>
-      <View className="flex-row items-center bg-[#FAFAFA] rounded-md px-1" style={{height : height * .07}} >
+      <View className="flex-row items-center bg-[#FAFAFA] rounded-md px-1"  >
         <TextInput
-          className="flex-1 p-2 text-md text-black  w-[90vw]"
+          className="flex-1 px-2 text-md text-black  w-[90vw]"
           style={{fontFamily: 'OpenSans-Bold'}}
           placeholder={placeholder}
           placeholderTextColor="gray"
@@ -85,6 +89,7 @@ const SharedInput = ({
           autoCorrect={false}
           keyboardType={keyboardType}
           onBlur={onBlur}
+          numberOfLines={multiline ? 3 : 1}
         />
   
         {secureText && (

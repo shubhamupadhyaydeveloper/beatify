@@ -19,8 +19,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ActualHomepage from 'src/homepage/ActualHomepage';
 import useGlobalState from 'src/store/globalState';
 import TabNavigation from './tab';
-import Index from 'src/homepage/Index';
-import Profile from 'src/homepage/Profile';
 
 const StackNavigator = () => {
   const AuthStack = createStackNavigator<AuthNavigationProps>();
@@ -28,20 +26,7 @@ const StackNavigator = () => {
   const {loggedIn} = useGlobalState();
 
   const RenderAppStack = () => {
-    return (
-      <AppStack.Navigator initialRouteName='Index'>
-         <AppStack.Screen
-           name='Index'
-           component={Index}
-           options={{headerShown : false}}
-         />
-         <AppStack.Screen
-          name='Profile'
-          component={Profile}
-          options={{headerShown : false}}
-         />
-      </AppStack.Navigator>
-    )
+    return <TabNavigation />
   };
 
   const RenderAuthStack = () => {
@@ -92,7 +77,7 @@ const StackNavigator = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-       background : "#EEF7FF"
+       background : "#111113"
       
     },
   };
