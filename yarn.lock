@@ -1259,13 +1259,6 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@react-native-async-storage/async-storage@^1.24.0":
-  version "1.24.0"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.24.0.tgz"
-  integrity sha512-W4/vbwUOYOjco0x3toB8QCr7EjIP6nE9G7o8PMguvvjYT5Awg09lyV4enACRx4s++PPulBiBSjL0KTFx2u0Z/g==
-  dependencies:
-    merge-options "^3.0.4"
-
 "@react-native-community/blur@^4.4.0":
   version "4.4.0"
   resolved "https://registry.npmjs.org/@react-native-community/blur/-/blur-4.4.0.tgz"
@@ -1583,15 +1576,6 @@
     query-string "^7.1.3"
     react-is "^16.13.0"
     use-latest-callback "^0.2.1"
-
-"@react-navigation/drawer@^6.7.2":
-  version "6.7.2"
-  resolved "https://registry.npmjs.org/@react-navigation/drawer/-/drawer-6.7.2.tgz"
-  integrity sha512-o4g2zgTZa2+oLd+8V33etrSM38KIqu8S/zCBTsdsHUoQyVE7JNRiv3Qgq/jMvEb8PZCqWmm7jHItcgzrBuwyOQ==
-  dependencies:
-    "@react-navigation/elements" "^1.3.31"
-    color "^4.2.3"
-    warn-once "^0.1.0"
 
 "@react-navigation/elements@^1.3.31":
   version "1.3.31"
@@ -3555,11 +3539,6 @@ is-number@^7.0.0:
 is-path-inside@^3.0.3:
   version "3.0.3"
 
-is-plain-obj@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz"
-  integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
-
 is-plain-object@^2.0.4:
   version "2.0.4"
   dependencies:
@@ -4214,13 +4193,6 @@ marky@^1.2.2:
 
 memoize-one@^5.0.0:
   version "5.2.1"
-
-merge-options@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.npmjs.org/merge-options/-/merge-options-3.0.4.tgz"
-  integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
-  dependencies:
-    is-plain-obj "^2.1.0"
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -5017,22 +4989,7 @@ react-native-gesture-handler@^2.18.1, "react-native-gesture-handler@>= 1.0.0", r
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
-react-native-image-picker@^7.1.2:
-  version "7.1.2"
-  resolved "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-7.1.2.tgz"
-  integrity sha512-b5y5nP60RIPxlAXlptn2QwlIuZWCUDWa/YPUVjgHc0Ih60mRiOg1PSzf0IjHSLeOZShCpirpvSPGnDExIpTRUg==
-
-react-native-linear-gradient@^2.8.3:
-  version "2.8.3"
-  resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
-  integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
-
-react-native-mmkv@^2.12.2:
-  version "2.12.2"
-  resolved "https://registry.npmjs.org/react-native-mmkv/-/react-native-mmkv-2.12.2.tgz"
-  integrity sha512-6058Aq0p57chPrUutLGe9fYoiDVDNMU2PKV+lLFUJ3GhoHvUrLdsS1PDSCLr00yqzL4WJQ7TTzH+V8cpyrNcfg==
-
-react-native-reanimated@^3.14.0, "react-native-reanimated@>= 1.0.0", react-native-reanimated@>=2.2.0:
+react-native-reanimated@^3.14.0, react-native-reanimated@>=2.2.0:
   version "3.14.0"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.14.0.tgz"
   integrity sha512-TAxLtCfRyC/nOLeWoX/8MhdIF+Fi1e1NbLhIgEm5Kv9/gioAwSNaqLUYxjIClU1RaLwSTE8iaiHNVhTU4TS9DA==
@@ -5072,12 +5029,7 @@ react-native-vector-icons@^10.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-video@^6.4.5:
-  version "6.4.5"
-  resolved "https://registry.npmjs.org/react-native-video/-/react-native-video-6.4.5.tgz"
-  integrity sha512-pq0oD/lm0NZv/nkQtNy2Bq1eG1+nlb9vVNgdeIz7twDhxLpqiwv4ef39UQlUHfPdnTa9fDyAke6VBc+0ogNjfA==
-
-react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", react-native@>=0.46, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.71.0, react-native@0.74.3:
+react-native@*, react-native@>=0.46, react-native@>=0.59, react-native@>=0.60.0, react-native@0.74.3:
   version "0.74.3"
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"

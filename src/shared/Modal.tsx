@@ -2,7 +2,6 @@ import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import React, { useCallback, useMemo, useRef } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-
 type Props = {
   bottomSheetRef: React.RefObject<BottomSheet>;
   children: React.ReactNode;

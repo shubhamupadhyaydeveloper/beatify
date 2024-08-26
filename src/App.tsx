@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import useGlobalState from './store/globalState';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
+import React from 'react';
+import {
+  useColorScheme,
+} from 'react-native';
+
+
 import StackNavigator from './navigation/stack';
-import Loader from '@shared/Loader';
+import { Text } from 'react-native';
+
 
 function App(): React.JSX.Element {
-  const [isReady, setIsReady] = useState(false);
+  const isDarkMode = useColorScheme() === 'dark';
 
-  useEffect(() => {
-    // Wait for hydration to complete
-    const unsub = useGlobalState.persist.onFinishHydration(() => {
-      setIsReady(true);
-    });
+  return (
+   <StackNavigator />
 
-    // Clean up the subscription
-    return () => {
-      unsub?.();
-    };
-  }, []);
-
-  if (!isReady) {
-    return (
-      <Loader />
-    );
-  }
-
-  return <StackNavigator />;
+  );
 }
+
 
 export default App;
