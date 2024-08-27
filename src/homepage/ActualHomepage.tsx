@@ -1,29 +1,155 @@
-import { View, Text, StatusBar, useWindowDimensions, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { setNavColor } from 'src/hooks/NavColor';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { AppNavigationProp, HomeNavigationProp, TabNavigationProps } from 'src/types/navigationProps';
+import {
+  View,
+  Text,
+  StatusBar,
+  useWindowDimensions,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  ScrollView,
+} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+import {
+  NavigationProp,
+  useNavigation,
+  DrawerActions,
+  useTheme,
+} from '@react-navigation/native';
+
+import HomeTop from './HomeTop';
+import Animated from 'react-native-reanimated';
+
+import { setNavColor } from '../hooks/NavColor';
+import CustomTouchableOpacity from '../shared/TouchableOpacity';
+import { artistsData, recentlyData } from '../constant/mockdata';
+import { HomepageNavigationProp } from 'src/types/navigationProps';
+
 
 const ActualHomepage = () => {
-  setNavColor({color : "#343434"})
-  const {width , height} = useWindowDimensions()
-  const navigation = useNavigation<NavigationProp<HomeNavigationProp>>()
+  setNavColor({color: '#000000'});
+  const {width, height} = useWindowDimensions();
+  const [currentPage, SetCurrentPage] = useState('All');
+  const navigation = useNavigation();
+  const homeNavigation = useNavigation<NavigationProp<HomepageNavigationProp>>()
+  const {dark} = useTheme()
+
+  const options: string[] = ['All', 'Latest', 'Liked'];
 
   return (
-    <SafeAreaView>
-       <StatusBar backgroundColor={"#343434"} />
-       <View className='flex flex-row'>
-        <TouchableOpacity activeOpacity={.7} className='items-center' onPress={() => navigation.navigate("Profile")}>
-          <View className='items-center justify-center bg-[#21c856] rounded-full' style={{width : 40, height : 40}}>
-            <Text className='text-black font-[RadioCanadaBig-Bold]'>S</Text>
+    <SafeAreaView className="px-5 mt-[3vh]">
+      <StatusBar backgroundColor={'#000000'} />
+        <View className="flex flex-row items-center mb-1 ">
+          <CustomTouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          >
+            <View
+              className="items-center justify-center bg-[#21c856] rounded-full"
+              style={{width: 35, height: 36}}>
+              <Text className="text-black font-[RadioCanadaBig-Bold]">S</Text>
+            </View>
+          </CustomTouchableOpacity>
+          <View className="flex flex-row ml-[2vw] ">
+            {options.map(item => (
+              <CustomTouchableOpacity
+                key={item}
+                onPress={() => SetCurrentPage(item)}>
+                <View
+                  className={` px-3 h-[40px] ${
+                    item === currentPage ? 'bg-[#21c856]' : 'bg-[#343434]'
+                  }  items-center justify-center rounded-full mr-3`}>
+                  <Text
+                    className={`${
+                      item === currentPage ? 'text-black' : 'text-white'
+                    } font-[RadioCanadaBig-Bold]`}>
+                    {item}
+                  </Text>
+                </View>
+              </CustomTouchableOpacity>
+            ))}
           </View>
+        </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
-        </TouchableOpacity>
-       </View>
-      <Text className='text-black'>ActualHomepage</Text>
+          {/* <HomeTop />p  */}
+
+        <View className='mb-[2vh]'>
+          <Text className="text-white text-[22px] font-[RadioCanadaBig-Bold] ">
+            Recently Played
+          </Text>
+          <View className="flex flex-row gap-2 mt-[1.5vh]">
+            <FlatList
+              data={recentlyData}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={() => <View className="w-[15px]"></View>}
+              renderItem={item => (
+                <CustomTouchableOpacity>
+                <View className="flex" key={item.item.name}>
+                  <Image
+                    source={{uri: item.item.image}}
+                    style={{width: width * 0.25, height: height * 0.12}}
+                  />
+                  <Text
+                    style={{width: width * 0.25}}
+                    className="text-white text-[11px] font-[RadioCanadaBig-Bold]">
+                    {item.item.name}
+                  </Text>
+                </View>
+                </CustomTouchableOpacity>
+              )}
+            />
+          </View>
+        </View>
+
+        <View className='gap-4 flex'>
+        <Text className="text-white text-[22px] font-[RadioCanadaBig-Bold] ">
+            Your favorite artists
+          </Text>
+           <FlatList
+            data={artistsData}
+            horizontal={true}
+            ItemSeparatorComponent={() => <View className='w-[15px]'/>}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+               <CustomTouchableOpacity onPress={() => homeNavigation.navigate("Artist",{data : item})}>
+                <View className='flex items-center'>
+                  <Image source={{uri : item.img}} style={{width : 100,height : 100}} className='rounded-full'/>
+                  <Text className='text-white font-[RadioCanadaBig-Bold] text-[17px] mt-1'>{item.name}</Text>
+                </View>
+               </CustomTouchableOpacity>
+            )}
+           />
+        </View>
+
+         <View className='mt-3'>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+           <Text className='mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]' style={{color : dark ? "black" : "white"}}>This is scrollable</Text>
+         </View>
+    
+      </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default ActualHomepage;

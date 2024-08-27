@@ -21,7 +21,6 @@ const Artist = () => {
   const {width, height} = useWindowDimensions();
 
 
-
   return (
     <View>
       <StatusBar

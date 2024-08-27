@@ -1,31 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import {
-  useColorScheme,
-} from 'react-native';
-
-
+import React, {useEffect, useState} from 'react';
+import {View, ActivityIndicator} from 'react-native';
+import useGlobalState from './store/globalState';
 import StackNavigator from './navigation/stack';
-import { Text } from 'react-native';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-
-
+import {Text} from 'react-native';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Wait for hydration to complete
+    const unsub = useGlobalState.persist.onFinishHydration(() => {
+      setIsReady(true);
+    });
+
+    // Clean up the subscription
+    return () => {
+      unsub?.();
+    };
+  }, []);
 
   return (
-    <BottomSheetModalProvider>
-      <StackNavigator />
-    </BottomSheetModalProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <BottomSheetModalProvider>
+        <StackNavigator />
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
-
 
 export default App;

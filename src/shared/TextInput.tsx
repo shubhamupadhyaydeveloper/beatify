@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {KeyboardTypeOptions, Text,Dimensions} from 'react-native';
+import {KeyboardTypeOptions, Text, Dimensions} from 'react-native';
 import {View, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Animated, {
@@ -10,7 +10,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-
 type props = {
   label: string;
   placeholder: string;
@@ -19,11 +18,16 @@ type props = {
   onBlur?: () => void;
   secureText?: boolean;
   keyboardType: KeyboardTypeOptions;
-  errorText? : any;
-  inputWidth?: number
+  errorText?: any;
+  inputWidth?: number;
+  multiline?: boolean;
+  labelColor?: string;
+  bgColor?: string;
+  isShake?: boolean;
+  showError?: boolean
 };
 
-const {height} = Dimensions.get('window')
+const {height} = Dimensions.get('window');
 
 const SharedInput = ({
   label,
@@ -34,7 +38,12 @@ const SharedInput = ({
   secureText,
   keyboardType,
   errorText,
-  inputWidth
+  inputWidth,
+  multiline,
+  labelColor,
+  bgColor,
+  isShake ,
+  showError
 }: props) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const transformValue = useSharedValue(0);
@@ -45,56 +54,69 @@ const SharedInput = ({
 
   const sakeUi = () => {
     transformValue.value = withSequence(
-      withTiming(-3, {duration : 10}),
-      withSpring(0,{
-        damping : 1,
-        mass : .3,
-        stiffness : 600,
-        restDisplacementThreshold : .01
-      })
-    )
- };
+      withTiming(-3, {duration: 10}),
+      withSpring(0, {
+        damping: 1,
+        mass: 0.3,
+        stiffness: 600,
+        restDisplacementThreshold: 0.01,
+      }),
+    );
+  };
 
- const inputStyle = useAnimatedStyle(() => {
-   return {
-     transform: [{translateX: transformValue.value}],
-   };
- });
+  const inputStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateX: transformValue.value}],
+    };
+  });
 
- if(errorText) {
-  sakeUi(  )
- }
-
+  if (errorText && isShake) {
+    sakeUi();
+  }
 
   return (
     <Animated.View style={inputStyle}>
-    <View style={{width : inputWidth}}>
-      <Text style={{fontFamily: 'RadioCanadaBig-Bold'}} className="text-[15px] mb-2 text-black">
-        {label}
-      </Text>
-      <View className="flex-row items-center bg-[#FAFAFA] rounded-md px-1" style={{height : height * .07}} >
-        <TextInput
-          className="flex-1 p-2 text-md text-black  w-[90vw]"
-          style={{fontFamily: 'OpenSans-Bold'}}
-          placeholder={placeholder}
-          placeholderTextColor="gray"
-          secureTextEntry={secureTextEntry}
-          onChangeText={onChange}
-          value={value}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType={keyboardType}
-          onBlur={onBlur}
-        />
-  
-        {secureText && (
-          <TouchableOpacity onPress={togglePasswordVisibility} className=''>
-           <Icon size={25} color="#B8B8B8" name={secureTextEntry === true ? "eye" : "eye-off"} />
-          </TouchableOpacity>
-        )}
+      <View style={{width: inputWidth}}>
+        <Text
+          style={{
+            fontFamily: 'RadioCanadaBig-Bold',
+            color: labelColor ?? '#000000',
+          }}
+          className="text-[15px] mb-2 ">
+          {label}
+        </Text>
+        <View className="flex-row items-center  rounded-md px-1" style={{backgroundColor : bgColor ?? "#FAFAFA"}}>
+          <TextInput
+            className="flex-1 px-2 text-md text-black  w-[90vw]"
+            style={{
+              fontFamily: 'RadioCanadaBig-Regular',
+              textAlignVertical: multiline ? 'top' : 'center',
+            }}
+            placeholder={placeholder}
+            placeholderTextColor="#B3B3B9"
+            secureTextEntry={secureTextEntry}
+            onChangeText={onChange}
+            value={value}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType={keyboardType}
+            onBlur={onBlur}
+            numberOfLines={multiline ? 2 : 1}
+            multiline={multiline}
+          />
+
+          {secureText && (
+            <TouchableOpacity onPress={togglePasswordVisibility} className="">
+              <Icon
+                size={25}
+                color="#B8B8B8"
+                name={secureTextEntry === true ? 'eye' : 'eye-off'}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+      {showError && <Text className="text-[10px] text-red-500">{errorText}</Text> }   
       </View>
-      <Text className='text-[10px] text-red-500'>{errorText}</Text>
-    </View>
     </Animated.View>
   );
 };
