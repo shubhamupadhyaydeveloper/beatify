@@ -13,14 +13,17 @@ import {
 
 import StackNavigator from './navigation/stack';
 import { Text } from 'react-native';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+
 
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-   <StackNavigator />
-
+    <BottomSheetModalProvider>
+      <StackNavigator />
+    </BottomSheetModalProvider>
   );
 }
 
