@@ -40,7 +40,7 @@ const LikedSong = () => {
       backgroundColor: interpolateColor(
         scrollY.value,
         [140, 180],
-        ['transparent', 'rgba(18, 91, 154, 1)','rgba(17, 17, 19, 1)'],
+        ['transparent', 'rgba(138,43,226,1)', 'rgba(17, 17, 19, 1)'],
       ),
     };
   });
@@ -94,9 +94,11 @@ const LikedSong = () => {
           </Text>
         </Animated.View>
       </Animated.View>
-      <Animated.ScrollView onScroll={handleScroll}>
+      <Animated.ScrollView
+        onScroll={handleScroll}
+        showsVerticalScrollIndicator={false}>
         <LinearGradient
-          colors={['rgba(18, 91, 154, 1)', 'rgba(17, 17, 19, 1)']}
+          colors={['rgba(138,43,226,1)', 'rgba(17, 17, 19, 1)']}
           className="px-3"
           style={{height: height * 0.45}}>
           <Animated.View

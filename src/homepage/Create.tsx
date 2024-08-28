@@ -126,6 +126,7 @@ const Create = () => {
           </Text>
           </View>
           <ScrollView
+             scrollEventThrottle={16}
             contentContainerStyle={{flexGrow: 1}}
             keyboardShouldPersistTaps="handled"
             className="mt-[2vh]"
@@ -197,7 +198,7 @@ const Create = () => {
                   style={{
                     backgroundColor: tertiaryColor,
                     width: width * 0.885,
-                    height: height * 0.1,
+                    height: height * 0.15,
                   }}>
                   <FeatherIcon name="upload" color={'white'} size={25} />
                   <Text

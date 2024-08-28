@@ -21,20 +21,24 @@ export type AppNavigationProp = TabNavigationProps & {
 };
 
 export type HomepageNavigationProp = {
-    ActualPage : undefined,
-    Artist : {data : {name : string , img : string}}
-}
+  ActualPage: undefined;
+  Artist: {data: {name: string; img: string}};
+  SongDetail: {
+    data: {name: string; image: string; singer: string; released: string,singerImage : string | string[]};
+  };
+};
+
 export type ExploreNavigationProp = {
-    SearchResults : undefined,
-    ActualExplore : undefined
-}
+  SearchResults: undefined;
+  ActualExplore: undefined;
+};
 
 export type DrawerNavigationTypes = {
-   Profile : undefined,
-
-}
+  Profile: undefined;
+};
 
 export type LibraryNavigationTypes = {
-    Index : undefined,
-    LikedSong : undefined
-}
+  Index: undefined;
+  LikedSong: undefined;
+  SelectArtist : undefined;
+};

@@ -7,17 +7,14 @@ import ActualHomepage from './ActualHomepage';
 import Profile from './Profile';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Artist from './Artist';
+import SongDetail from './SongDetail';
 
 const HompageIndex = () => {
   const Stack = createStackNavigator<HomepageNavigationProp>();
   const Drawer = createDrawerNavigator<HomepageNavigationProp>();
   return (
-    <Drawer.Navigator
-      initialRouteName="ActualPage"
-      screenOptions={{
-        drawerType: 'slide',
-        overlayColor: 'transparent',
-      }}>
+    <Stack.Navigator
+      initialRouteName="ActualPage">
       <Stack.Screen
         name="ActualPage"
         component={ActualHomepage}
@@ -28,7 +25,12 @@ const HompageIndex = () => {
         component={Artist}
         options={{headerShown: false}}
       />
-    </Drawer.Navigator>
+      <Stack.Screen
+        name='SongDetail'
+        component={SongDetail}
+        options={{headerShown : false}}
+      />
+    </Stack.Navigator>
   );
 };
 

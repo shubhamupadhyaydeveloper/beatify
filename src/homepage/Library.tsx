@@ -166,6 +166,7 @@ const Library = () => {
 
         <View className="px-5 mt-[2vh]">
           <TouchableOpacity
+            onPress={() => libraryNavigation.navigate("SelectArtist")}
             className="flex flex-row items-center gap-5"
             activeOpacity={0.8}>
             <View

@@ -5,6 +5,7 @@ import { NavigationProp } from '@react-navigation/native'
 import { LibraryNavigationTypes } from 'src/types/navigationProps'
 import Library from 'src/homepage/Library'
 import LikedSong from 'src/homepage/LikedSong'
+import SelectArtist from 'src/artists/SelectArtist'
 
 const LibraryIndex = () => {
   const Stack = createStackNavigator<LibraryNavigationTypes>()
@@ -19,6 +20,11 @@ const LibraryIndex = () => {
           name='LikedSong'
           component={LikedSong}
            options={{headerShown : false}}
+        />
+        <Stack.Screen
+          name='SelectArtist'
+          component={SelectArtist}
+          options={{headerShown : false}}
         />
     </Stack.Navigator>
   )

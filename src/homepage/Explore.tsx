@@ -48,11 +48,6 @@ const Explore = () => {
         </Text>
       </TouchableOpacity>
 
-      <CustomTouchableOpacity>
-          <View className='w-[100px] h-[100px] bg-white items-center justify-center'>
-             <Text className='text-black'>click me</Text>
-          </View>
-      </CustomTouchableOpacity>
     
     </SafeAreaView>
   );

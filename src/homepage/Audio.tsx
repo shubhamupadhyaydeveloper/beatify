@@ -40,7 +40,7 @@ const Audio = ({handleAudioUrl}:prop) => {
         style={{
           backgroundColor: tertiaryColor,
           width: width * 0.885,
-          height: height * 0.1,
+          height: height * 0.15,
         }}>
         <View
           className=" ">
