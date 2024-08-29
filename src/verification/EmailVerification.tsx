@@ -53,8 +53,8 @@ const EmailVerification = () => {
       className="flex-1 ">
       <SafeAreaView className="bg-white h-full">
         <ScrollView
-          contentContainerStyle={{flexGrow: 1}}
-          keyboardShouldPersistTaps="handled">
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps="handled">
           <Header title="Verification" />
           <View className="items-center mt-[2vh]">
             <LottieView

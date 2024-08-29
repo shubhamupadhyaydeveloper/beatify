@@ -28,14 +28,20 @@ import Animated, {
 } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { primaryColor, secondaryColor, tertiaryColor } from '../constant/color';
-import { filterOptions } from '../constant/mockdata';
+import {primaryColor, secondaryColor, tertiaryColor} from '../constant/color';
+import {filterOptions} from '../constant/mockdata';
 import SharedModal from '../shared/Modal';
-import { LibraryNavigationTypes, TabNavigationProps } from 'src/types/navigationProps';
+import {
+  CreateNavigationTypes,
+  LibraryNavigationTypes,
+  TabNavigationProps,
+} from 'src/types/navigationProps';
 
 const Library = () => {
   const navigation = useNavigation<NavigationProp<TabNavigationProps>>();
-  const libraryNavigation = useNavigation<NavigationProp<LibraryNavigationTypes>>();
+  const libraryNavigation =
+    useNavigation<NavigationProp<LibraryNavigationTypes>>();
+  const createNavigation = useNavigation<NavigationProp<CreateNavigationTypes>>();
   const [filter, SetFilter] = useState<string>('');
   const {width, height} = useWindowDimensions();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -43,7 +49,7 @@ const Library = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const snapPoints = ["30%"]
+  const snapPoints = ['30%'];
   const sharedOpacity = useSharedValue(0);
 
   const filterStyle = useAnimatedStyle(() => {
@@ -166,7 +172,7 @@ const Library = () => {
 
         <View className="px-5 mt-[2vh]">
           <TouchableOpacity
-            onPress={() => libraryNavigation.navigate("SelectArtist")}
+            onPress={() => libraryNavigation.navigate('SelectArtist')}
             className="flex flex-row items-center gap-5"
             activeOpacity={0.8}>
             <View
@@ -181,9 +187,15 @@ const Library = () => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <SharedModal bottomSheetRef={bottomSheetModalRef} customSnapPoints={snapPoints}>
+      <SharedModal
+        bottomSheetRef={bottomSheetModalRef}
+        customSnapPoints={snapPoints}>
         <View className="px-5 mt-2">
           <TouchableOpacity
+            onPress={() => {
+               libraryNavigation.navigate("CreatePlaylist")
+               bottomSheetModalRef.current?.close()
+            }}
             activeOpacity={0.7}
             className="flex flex-row items-center gap-4">
             <FeatherIcon name="music" color={secondaryColor} size={25} />

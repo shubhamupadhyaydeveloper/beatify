@@ -10,7 +10,7 @@ const RegisterSuccessful = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationProps>>()
   useEffect(() => {
     setTimeout(() => {
-       navigation.navigate('Homepage')
+      //  navigation.navigate('')
     },2000)
   },[])
   return (

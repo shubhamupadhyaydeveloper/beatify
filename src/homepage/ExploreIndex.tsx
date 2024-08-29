@@ -18,6 +18,7 @@ const ExploreIndex = () => {
         component={Search}
         options={{headerShown: false}}
       />
+     
     </Stack.Navigator>
   );
 };

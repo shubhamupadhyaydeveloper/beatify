@@ -23,11 +23,13 @@ import {AuthNavigationProps} from 'src/types/navigationProps';
 import bottomSheet from '@gorhom/bottom-sheet';
 import SharedModal from '@shared/Modal';
 import ForgetPassword from 'src/forgetpassword/ForgetPassword';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 
 const SignIn = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationProps>>();
-  const bottomSheetRef = useRef<bottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
   const {width, height} = useWindowDimensions();
+  const snapPoint = ['35%'];
 
   const {
     control,
@@ -55,7 +57,6 @@ const SignIn = () => {
     bottomSheetRef.current?.expand();
   };
 
-
   return (
     <SafeAreaView className=" bg-white h-full ">
       <View className="items-center">
@@ -67,26 +68,26 @@ const SignIn = () => {
         </Text> */}
         <View style={{width: width * 0.85}} className="mx-auto">
           {signinFields.map(item => (
-              <Controller
-                key={item.name}
-                name={item.name}
-                control={control}
-                render={({field: {value, onBlur, onChange}}) => (
-                  <View className="mt-3">
-                    <SharedInput
-                      keyboardType={item.keyboardType as KeyboardTypeOptions}
-                      label={item.label}
-                      placeholder={item.placeholder}
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      errorText={errors[item.name]?.message}
-                      secureText={item.secureText}
-                    />
-                  </View>
-                )}
-              />
-            ))}
+            <Controller
+              key={item.name}
+              name={item.name}
+              control={control}
+              render={({field: {value, onBlur, onChange}}) => (
+                <View className="mt-3">
+                  <SharedInput
+                    keyboardType={item.keyboardType as KeyboardTypeOptions}
+                    label={item.label}
+                    placeholder={item.placeholder}
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    errorText={errors[item.name]?.message}
+                    secureText={item.secureText}
+                  />
+                </View>
+              )}
+            />
+          ))}
 
           <TouchableOpacity
             activeOpacity={0.7}
@@ -113,8 +114,8 @@ const SignIn = () => {
         />
       </View>
 
-      <SharedModal bottomSheetRef={bottomSheetRef}>
-         <ForgetPassword />
+      <SharedModal bottomSheetRef={bottomSheetRef} customSnapPoints={snapPoint}>
+        <ForgetPassword />
       </SharedModal>
     </SafeAreaView>
   );

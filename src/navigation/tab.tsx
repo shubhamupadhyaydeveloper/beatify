@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, useWindowDimensions} from 'react-native';
+import {View, Text, StyleSheet, useWindowDimensions, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -13,8 +13,9 @@ import ExploreIndex from '../homepage/ExploreIndex';
 import Create from '../homepage/Create';
 import LibraryIndex from '../pages/LibraryIndex';
 import CustomDrawerContent from '../pages/DrawerContent';
-import { TabNavigationProps } from 'src/types/navigationProps';
+import {TabNavigationProps} from 'src/types/navigationProps';
 import HompageIndex from 'src/homepage/HompageIndex';
+import CreateIndex from 'src/pages/CreateIndex';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator<TabNavigationProps>();
@@ -46,10 +47,9 @@ const TabNavigation = () => {
         initialRouteName="Home"
         screenOptions={{
           lazy: true,
-          tabBarHideOnKeyboard: true,
           tabBarBackground: () => <GradientTabBar />,
           tabBarStyle: {
-            zIndex : 5,
+            zIndex: 5,
             position: 'absolute',
             borderTopWidth: 0, // Remove the white line
             elevation: 0, // Remove shadow on Android
@@ -93,8 +93,30 @@ const TabNavigation = () => {
           }}
         />
         <Tab.Screen
+          name="Library"
+          component={LibraryIndex}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({focused, color}) => (
+              <View>
+                {focused ? (
+                  <Image
+                    source={require('../../assets/library.png')}
+                    style={{width: 25, height: 25, tintColor: color}}
+                  />
+                ) : (
+                  <Image
+                    source={require('../../assets/music-album.png')}
+                    style={{width: 25, height: 25, tintColor: color}}
+                  />
+                )}
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
           name="Create"
-          component={Create}
+          component={CreateIndex}
           options={{
             headerShown: false,
             tabBarIcon: ({focused, color}) => (
@@ -108,22 +130,6 @@ const TabNavigation = () => {
             ),
           }}
         />
-        <Tab.Screen
-          name="Library"
-          component={LibraryIndex}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({focused, color}) => (
-              <View>
-                <IonIcons
-                  color={color}
-                  name={focused ? 'library' : 'library-outline'}
-                  size={25}
-                />
-              </View>
-            ),
-          }}
-        />
       </Tab.Navigator>
     );
   }
@@ -131,14 +137,14 @@ const TabNavigation = () => {
   return (
     <Drawer.Navigator
       initialRouteName="Index"
-      drawerContent={props => <CustomDrawerContent   props={props}/>}
+      drawerContent={props => <CustomDrawerContent props={props} />}
       screenOptions={{
         drawerType: 'slide',
         overlayColor: 'rgba(0, 0, 0, 0.6)',
-        drawerStyle : {
-          backgroundColor : "#2E2E2E",
-          width : width * .9
-        }
+        drawerStyle: {
+          backgroundColor: '#2E2E2E',
+          width: width * 0.9,
+        },
       }}>
       <Drawer.Screen
         name="Index"

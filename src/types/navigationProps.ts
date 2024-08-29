@@ -41,4 +41,11 @@ export type LibraryNavigationTypes = {
   Index: undefined;
   LikedSong: undefined;
   SelectArtist : undefined;
+  PlaylistPage : undefined;
+  CreatePlaylist : undefined
 };
+
+export type CreateNavigationTypes = {
+   CreateIndex : undefined;
+   test : undefined
+}

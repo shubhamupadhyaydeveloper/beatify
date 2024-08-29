@@ -6,6 +6,8 @@ import { LibraryNavigationTypes } from 'src/types/navigationProps'
 import Library from 'src/homepage/Library'
 import LikedSong from 'src/homepage/LikedSong'
 import SelectArtist from 'src/artists/SelectArtist'
+import PlaylistPage from './PlaylistPage'
+import CreatePlaylist from './CreatePlaylist'
 
 const LibraryIndex = () => {
   const Stack = createStackNavigator<LibraryNavigationTypes>()
@@ -25,6 +27,16 @@ const LibraryIndex = () => {
           name='SelectArtist'
           component={SelectArtist}
           options={{headerShown : false}}
+        />
+        <Stack.Screen
+         name='CreatePlaylist'
+         component={CreatePlaylist}
+         options={{headerShown : false}}
+        />
+        <Stack.Screen
+         name='PlaylistPage'
+         component={PlaylistPage}
+         options={{headerShown : false}}
         />
     </Stack.Navigator>
   )
