@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
 import {
   NavigationProp,
   useNavigation,
@@ -29,6 +28,7 @@ import {HomepageNavigationProp} from 'src/types/navigationProps';
 const ActualHomepage = () => {
   setNavColor({color: '#000000'});
   const {width, height} = useWindowDimensions();
+  const isLandscape = width > height
   const [currentPage, SetCurrentPage] = useState('All');
   const navigation = useNavigation();
   const homeNavigation =
@@ -70,7 +70,6 @@ const ActualHomepage = () => {
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <HomeTop />p  */}
 
         <View className="mb-[2vh]">
           <Text className="text-white text-[22px] font-[RadioCanadaBig-Bold] ">
@@ -81,7 +80,7 @@ const ActualHomepage = () => {
               data={recentlyData}
               horizontal
               showsHorizontalScrollIndicator={false}
-              ItemSeparatorComponent={() => <View className="w-[15px]"></View>}
+              ItemSeparatorComponent={() => <View style={{width : isLandscape ? 0 : 15}}></View>}
               renderItem={({item}) => (
                 <CustomTouchableOpacity
                   onPress={() =>
@@ -90,7 +89,7 @@ const ActualHomepage = () => {
                   <View className="flex" key={item.name}>
                     <Image
                       source={{uri: item.image}}
-                      style={{width: width * 0.35, height: height * 0.18}}
+                      style={{width: isLandscape ? width * .22 : width * 0.35, height: isLandscape ? height * .38 :  height * 0.18}}
                     />
                     <Text
                       style={{width: width * 0.25}}

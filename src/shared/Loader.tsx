@@ -8,7 +8,7 @@ const Loader = () => {
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',backgroundColor : "black"}}>
     <LottieView
       style={{width: width * 0.45, height: height * 0.25}}
-      source={require('../../assets/loading.json')}
+      source={require('../../assets/gifs/loading.json')}
       autoPlay
       loop={true}
     />

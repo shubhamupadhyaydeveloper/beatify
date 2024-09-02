@@ -37,7 +37,7 @@ const ResetPassword = () => {
       <View className="items-center mt-[2vh]">
         <LottieView
           style={{width: width * 0.75, height: height * 0.35}}
-          source={require('../../assets/reset.json')}
+          source={require('../../assets/gifs/reset.json')}
           autoPlay
           loop={false}
         />

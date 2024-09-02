@@ -24,7 +24,7 @@ export const recentlyData: recentType[] = [
     singerImage: [
       'https://yt3.googleusercontent.com/ytc/AIdro_kr_7hXS2Zpnqengg9mbRktyquBfE639BNt2nwwU3zFN0I=s900-c-k-c0x00ffffff-no-rj',
       'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Ram_Sampath_at_the_Loreal_Paris_Femina_Women_Awards_2014.jpg/220px-Ram_Sampath_at_the_Loreal_Paris_Femina_Women_Awards_2014.jpg',
-      'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201706/leisure-jun12-37_647_060217010656.jpg'
+      'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201706/leisure-jun12-37_647_060217010656.jpg',
     ],
   },
   {
@@ -37,6 +37,14 @@ export const recentlyData: recentType[] = [
   },
   {
     name: 'G.O.A.T',
+    image: 'https://upload.wikimedia.org/wikipedia/en/b/bb/Goat_Diljit.jpg',
+    singer: 'Diljit Dosanjh',
+    released: '2022',
+    singerImage:
+      'https://www.bollywoodhungama.com/wp-content/uploads/2016/03/Diljit.jpg',
+  },
+  {
+    name: 'b.O.A.T',
     image: 'https://upload.wikimedia.org/wikipedia/en/b/bb/Goat_Diljit.jpg',
     singer: 'Diljit Dosanjh',
     released: '2022',
@@ -100,5 +108,74 @@ export const artistsData: artist[] = [
     name: 'Kishore Kumar',
     img: 'https://yt3.googleusercontent.com/VzKX7I0iD2eEHoWqk2drqOTFsPWX6hTGul0drSXXde8hWEcYNq7H_VdWHBC5RDawV_LoUBmD=s900-c-k-c0x00ffffff-no-rj',
   },
+];
+
+
+
+export const reelsImages = [
+    {
+       id : 1,
+       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+    },
+    {
+       id : 2,
+       image : "https://images.unsplash.com/photo-1724862941235-0d880da26f6e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+       id : 3,
+       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+    },
+    {
+       id : 4,
+       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+    },
+    {
+       id : 5,
+       image : "https://plus.unsplash.com/premium_photo-1697778136245-d0d67de916ef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+       id : 6,
+       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+    },
+    {
+       id : 7,
+       image : "https://images.unsplash.com/photo-1724961754771-d5543bd71a54?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+       id : 8,
+       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
+      
+      },
+    {
+       id : 9,
+       image :"https://plus.unsplash.com/premium_photo-1698362819363-0b2a2f83c0a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8"
+     },
+    {
+       id : 10,
+       image : "https://images.unsplash.com/photo-1724805053809-3c09736b2ade?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8"
+    },
 
 ];
+
+export const reelsVideo = [
+   {
+     id : 1,
+     url : require("../../assets/videos/video.mp4")
+   },
+   {
+     id : 2,
+     url : require("../../assets/videos/video1.mp4")
+   },
+   {
+     id : 3,
+     url : require("../../assets/videos/video2.mp4")
+   },
+   {
+     id : 4,
+     url : require("../../assets/videos/video3.mp4")
+   },
+   {
+     id : 5,
+     url : require("../../assets/videos/video4.mp4")
+   },
+]

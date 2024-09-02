@@ -31,6 +31,7 @@ export type HomepageNavigationProp = {
 export type ExploreNavigationProp = {
   SearchResults: undefined;
   ActualExplore: undefined;
+  Reels : {index : number}
 };
 
 export type DrawerNavigationTypes = {
@@ -47,5 +48,4 @@ export type LibraryNavigationTypes = {
 
 export type CreateNavigationTypes = {
    CreateIndex : undefined;
-   test : undefined
 }

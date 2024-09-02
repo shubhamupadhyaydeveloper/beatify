@@ -101,12 +101,12 @@ const TabNavigation = () => {
               <View>
                 {focused ? (
                   <Image
-                    source={require('../../assets/library.png')}
+                    source={require('../../assets/images/library.png')}
                     style={{width: 25, height: 25, tintColor: color}}
                   />
                 ) : (
                   <Image
-                    source={require('../../assets/music-album.png')}
+                    source={require('../../assets/images/music-album.png')}
                     style={{width: 25, height: 25, tintColor: color}}
                   />
                 )}

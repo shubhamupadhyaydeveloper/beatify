@@ -31,7 +31,7 @@ import OAuth from './OAuth';
         </View>
 
         <View className='flex items-center' style={{marginLeft : width * .045}}>
-        <LottieView style={{width : width * .9 , height : height * .35}} source={require('../../assets/guitar.json')} autoPlay loop />
+        <LottieView style={{width : width * .9 , height : height * .35}} source={require('../../assets/gifs/guitar.json')} autoPlay loop />
         </View>
         <View className="items-center mt-[5vh]">
           <View className="flex  gap-3">

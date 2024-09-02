@@ -59,7 +59,7 @@ const EmailVerification = () => {
           <View className="items-center mt-[2vh]">
             <LottieView
               style={{width: width * 0.65, height: height * 0.37}}
-              source={require('../../assets/otpemail.json')}
+              source={require('../../assets/gifs/otpemail.json')}
               autoPlay
               loop={false}
             />

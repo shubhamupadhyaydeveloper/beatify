@@ -7,6 +7,7 @@ import Library from 'src/homepage/Library'
 import LikedSong from 'src/homepage/LikedSong'
 import Create from 'src/homepage/Create'
 import Test from './Test'
+import Reels from './Reels'
 
 
 const CreateIndex = () => {
@@ -18,12 +19,6 @@ const CreateIndex = () => {
           component={Create}
           options={{headerShown : false}}
         />
-        <Stack.Screen
-          name='test'
-          component={Test}
-           options={{headerShown : false}}
-        />
-
     </Stack.Navigator>
   )
 }

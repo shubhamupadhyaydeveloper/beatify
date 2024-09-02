@@ -49,30 +49,36 @@ const PlaylistPage = () => {
   const ImageStyle = useAnimatedStyle(() => {
     const scrollScale = interpolate(
       scrollY.value,
-      [50, 110],
+      [50, 100],
       [1, 0.5],
       Extrapolation.CLAMP,
     );
     const scrollOpacity = interpolate(
       scrollY.value,
-      [100, 130],
+      [100, 115],
       [1, 0],
       Extrapolation.CLAMP,
     );
 
-    const scrollMarginBottom = interpolate(
-      scrollY.value,
-      [50,140],
-      [10,-50],
-      Extrapolation.CLAMP
-    )
-
     return {
       transform: [{scale: scrollScale}],
       opacity: scrollOpacity,
-      marginBottom : scrollMarginBottom
     };
   });
+
+  const MarginBottomStyle = useAnimatedStyle(() => {
+    const scrollMarginBottom = interpolate(
+      scrollY.value,
+      [50, 150],
+      [10, -90],
+      Extrapolation.CLAMP,
+    );
+
+    return {
+      marginBottom: scrollMarginBottom,
+    };
+  });
+
   return (
     <View>
       <StatusBar
@@ -114,25 +120,23 @@ const PlaylistPage = () => {
         scrollEventThrottle={16}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator={false}>
-        <LinearGradient
-          colors={['#3C3D37', 'rgba(17, 17, 19, 1)']}
-          style={{height: height * 0.52}}>
-          <View style={{height: 100}} />
-          <Animated.View
-            style={[{width}, ImageStyle]}
-            className="mx-auto flex items-center">
-            <View
-              className="sticky top-[5px] bg-white"
-              style={{width: width * 0.5, height: height * 0.25}}
-            />
-          </Animated.View>
+        <Animated.View style={[MarginBottomStyle]}>
+          <LinearGradient
+            colors={['#3C3D37', 'rgba(17, 17, 19, 1)']}
+            style={{height: height * 0.4}}>
+            <View style={{height: 90}} />
+            <Animated.View
+              style={[{width}, ImageStyle]}
+              className="mx-auto flex items-center">
+              <View
+                className=" bg-white"
+                style={{width: width * 0.5, height: height * 0.25}}
+              />
+            </Animated.View>
+          </LinearGradient>
+        </Animated.View>
 
-          <View className="px-3 ">
-            <Text>hello this is title</Text>
-          </View>
-        </LinearGradient>
-
-        <View className="w-full p-3 bg-white mt-[1vh]">
+        <View className="w-full p-3 bg-white ">
           <Text className="text-black">This is fixed</Text>
         </View>
 

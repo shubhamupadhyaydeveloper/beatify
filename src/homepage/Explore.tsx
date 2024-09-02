@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, useWindowDimensions} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  FlatList,
+  Image,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import IonIcons from 'react-native-vector-icons/Ionicons';
@@ -9,13 +16,16 @@ import {
 } from '@react-navigation/native';
 
 import CustomTouchableOpacity from '../shared/TouchableOpacity';
-import { ExploreNavigationProp } from 'src/types/navigationProps';
+import {
+  CreateNavigationTypes,
+  ExploreNavigationProp,
+} from 'src/types/navigationProps';
+import {reelsImages} from 'src/constant/mockdata';
 
 const Explore = () => {
   const navigation = useNavigation<NavigationProp<ExploreNavigationProp>>();
   const {width, height} = useWindowDimensions();
-
-
+  const mockData = reelsImages.slice(0, 3);
 
   return (
     <SafeAreaView className="px-5 mt-[3vh]">
@@ -48,7 +58,17 @@ const Explore = () => {
         </Text>
       </TouchableOpacity>
 
-    
+      <View className="flex flex-row gap-2 items-center mt-[2vh]">
+        {mockData.map((item, index) => (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            key={index}
+            className="border border-white"
+            onPress={() => navigation.navigate('Reels',{index : item.id})}>
+            <Image source={{uri: item.image}} style={{height: 150, width: 100}} />
+          </TouchableOpacity>
+        ))}
+      </View>
     </SafeAreaView>
   );
 };
