@@ -1,4 +1,4 @@
-type recentType = {
+export type recentType = {
   name: string;
   image: string;
   singer: string;
@@ -44,12 +44,20 @@ export const recentlyData: recentType[] = [
       'https://www.bollywoodhungama.com/wp-content/uploads/2016/03/Diljit.jpg',
   },
   {
-    name: 'b.O.A.T',
-    image: 'https://upload.wikimedia.org/wikipedia/en/b/bb/Goat_Diljit.jpg',
-    singer: 'Diljit Dosanjh',
+    name: 'Loser',
+    image: 'https://c.saavncdn.com/021/Loser-Hindi-2016-20211220222542-500x500.jpg',
+    singer: 'Dino James',
     released: '2022',
     singerImage:
-      'https://www.bollywoodhungama.com/wp-content/uploads/2016/03/Diljit.jpg',
+      'https://yt3.googleusercontent.com/mxF2vU8SbHZRKt2wyKAc2FeNizd2kHoKLwawLT1bpycefwlmZS64EBVOM7pkfqIPqKgDa2hAiQ=s900-c-k-c0x00ffffff-no-rj',
+  },
+  {
+    name: 'Keede',
+    image: 'https://c.saavncdn.com/078/Keede-Hindi-2021-20210311205357-500x500.jpg',
+    singer: 'Dino James',
+    released: '2022',
+    singerImage:
+      'https://yt3.googleusercontent.com/mxF2vU8SbHZRKt2wyKAc2FeNizd2kHoKLwawLT1bpycefwlmZS64EBVOM7pkfqIPqKgDa2hAiQ=s900-c-k-c0x00ffffff-no-rj',
   },
 ];
 
@@ -111,71 +119,36 @@ export const artistsData: artist[] = [
 ];
 
 
-
-export const reelsImages = [
-    {
-       id : 1,
-       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
-    },
-    {
-       id : 2,
-       image : "https://images.unsplash.com/photo-1724862941235-0d880da26f6e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMnx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-       id : 3,
-       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
-    },
-    {
-       id : 4,
-       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
-    },
-    {
-       id : 5,
-       image : "https://plus.unsplash.com/premium_photo-1697778136245-d0d67de916ef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-       id : 6,
-       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
-    },
-    {
-       id : 7,
-       image : "https://images.unsplash.com/photo-1724961754771-d5543bd71a54?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-       id : 8,
-       image : "https://images.unsplash.com/photo-1724931498964-a1f392ba9ace?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8"
-      
-      },
-    {
-       id : 9,
-       image :"https://plus.unsplash.com/premium_photo-1698362819363-0b2a2f83c0a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8"
-     },
-    {
-       id : 10,
-       image : "https://images.unsplash.com/photo-1724805053809-3c09736b2ade?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8"
-    },
-
+export const musicOptions = [
+  {
+    name: 'Pop',
+    color: '#4E31AA',
+    image:
+      'https://media.istockphoto.com/id/1455958110/vector/pop-art-style-font.jpg?s=612x612&w=0&k=20&c=qNbueaF_UuDw4cQ3nSJdjDVGfjHTfOIO5-5uW6YDk8g=',
+  },
+  {
+    name: 'Punjabi',
+    color: '#A04747',
+    image: 'https://source.boomplaymusic.com/group10/M00/08/17/e754a1a038bf4ef7b7c8082a62156f8c_320_320.jpg'
+  },
+  {
+    name: 'Hindi',
+    color: '#295F98',
+    image: 'https://i.scdn.co/image/ab67616d0000b27316c6c8bb0e6505eaf1105607'
+  },
+  {
+    name: 'English',
+    color: '#C7253E',
+    image: 'https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ff7c23656a589774020de9ea'
+  },
+  {
+    name: 'New Songs',
+    color: '#77E4C8',
+    image: 'https://assets.rjassets.com/static/playlist/9824311/eb95f1ee8bb1d97.jpg'
+  },
+  {
+    name: 'Made for You',
+    color: '#399918',
+    image: 'https://images.squarespace-cdn.com/content/v1/5d5d57d1c5261d0001977a67/9c746d49-9e7c-43e6-b18c-fa32ab398a4c/KSCo_SpotifyAlbumCover_SongsToMakeYouSmile_Shop_SqUnder250.jpg'
+  },
 ];
-
-export const reelsVideo = [
-   {
-     id : 1,
-     url : require("../../assets/videos/video.mp4")
-   },
-   {
-     id : 2,
-     url : require("../../assets/videos/video1.mp4")
-   },
-   {
-     id : 3,
-     url : require("../../assets/videos/video2.mp4")
-   },
-   {
-     id : 4,
-     url : require("../../assets/videos/video3.mp4")
-   },
-   {
-     id : 5,
-     url : require("../../assets/videos/video4.mp4")
-   },
-]

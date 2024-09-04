@@ -20,6 +20,38 @@
     {
       "path": "assets/fonts/RadioCanadaBig-Regular.ttf",
       "sha1": "fc363978f062a32e774b794236f6050858cb5870"
+    },
+    {
+      "path": "assets/videos/low 2.mp4",
+      "sha1": "25d71885de07296e54194a6c0a81a9deef77b7ed"
+    },
+    {
+      "path": "assets/videos/low 3.mp4",
+      "sha1": "a0c7b2690618b317e054479839b5f298f259203e"
+    },
+    {
+      "path": "assets/videos/low.mp4",
+      "sha1": "e6bed3283c457ea440bcafcf702e81609aa07f5b"
+    },
+    {
+      "path": "assets/videos/video.mp4",
+      "sha1": "bc346ed8251ddfbdb18e207fde0b03e95c6842ee"
+    },
+    {
+      "path": "assets/videos/video1.mp4",
+      "sha1": "0a8deef9ace929e826d6eb498776c0dbcf16c548"
+    },
+    {
+      "path": "assets/videos/video2.mp4",
+      "sha1": "7d193ea9e9bb1e514c4d9d178fb4c22d6c23c45d"
+    },
+    {
+      "path": "assets/videos/video3.mp4",
+      "sha1": "7e3752b2a1517d07e851a8c4640486bf185ab67c"
+    },
+    {
+      "path": "assets/videos/video4.mp4",
+      "sha1": "1c8670d6c6994ebc9efa56e280ad18dedd6f7d9d"
     }
   ]
 }

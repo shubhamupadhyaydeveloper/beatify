@@ -19,6 +19,14 @@
 		3C2F5241147447DA88C1B5DF /* OpenSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82CDB0B0151E4F1893A15325 /* OpenSans-MediumItalic.ttf */; };
 		16840593CC7347C4A446BB73 /* RadioCanadaBig-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DA4C2C1C1A146479B4B31CB /* RadioCanadaBig-Bold.ttf */; };
 		A9449DF0CD8A442EA4E4FACA /* RadioCanadaBig-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7029B102F04416BB99C6A9E /* RadioCanadaBig-Regular.ttf */; };
+		13B16AF7A9944095A585D306 /* low 2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 37AA137599F744EABC8104CD /* low 2.mp4 */; };
+		33591D4EE75D40C2BA0D0EE2 /* low 3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 24E7F402736343CF9928E6A2 /* low 3.mp4 */; };
+		5807208151784BF5960A7382 /* low.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C02546327DC74DADA2183F31 /* low.mp4 */; };
+		BAD1757B0FD04420879EA90A /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7DCDE35F079644E3A5EBE629 /* video.mp4 */; };
+		72DDF341AE4A411882BD20E4 /* video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 30E4A98B415241AB851C224B /* video1.mp4 */; };
+		81F421568FE84479B960E9E9 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A0D8345DB4FB458ABFDD29A8 /* video2.mp4 */; };
+		7BAC87AF77984FFBBD3BD728 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AC95515AE4155BCDA29BD /* video3.mp4 */; };
+		927336C6E51C4E2F93BB71AF /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 67DF2B5162DB42A1A9CE576F /* video4.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +63,14 @@
 		82CDB0B0151E4F1893A15325 /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; name = "OpenSans-MediumItalic.ttf"; path = "../assets/fonts/OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		9DA4C2C1C1A146479B4B31CB /* RadioCanadaBig-Bold.ttf */ = {isa = PBXFileReference; name = "RadioCanadaBig-Bold.ttf"; path = "../assets/fonts/RadioCanadaBig-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C7029B102F04416BB99C6A9E /* RadioCanadaBig-Regular.ttf */ = {isa = PBXFileReference; name = "RadioCanadaBig-Regular.ttf"; path = "../assets/fonts/RadioCanadaBig-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		37AA137599F744EABC8104CD /* low 2.mp4 */ = {isa = PBXFileReference; name = "low 2.mp4"; path = "../assets/videos/low 2.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		24E7F402736343CF9928E6A2 /* low 3.mp4 */ = {isa = PBXFileReference; name = "low 3.mp4"; path = "../assets/videos/low 3.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C02546327DC74DADA2183F31 /* low.mp4 */ = {isa = PBXFileReference; name = "low.mp4"; path = "../assets/videos/low.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7DCDE35F079644E3A5EBE629 /* video.mp4 */ = {isa = PBXFileReference; name = "video.mp4"; path = "../assets/videos/video.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		30E4A98B415241AB851C224B /* video1.mp4 */ = {isa = PBXFileReference; name = "video1.mp4"; path = "../assets/videos/video1.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A0D8345DB4FB458ABFDD29A8 /* video2.mp4 */ = {isa = PBXFileReference; name = "video2.mp4"; path = "../assets/videos/video2.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B5AC95515AE4155BCDA29BD /* video3.mp4 */ = {isa = PBXFileReference; name = "video3.mp4"; path = "../assets/videos/video3.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		67DF2B5162DB42A1A9CE576F /* video4.mp4 */ = {isa = PBXFileReference; name = "video4.mp4"; path = "../assets/videos/video4.mp4"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +185,14 @@
 				82CDB0B0151E4F1893A15325 /* OpenSans-MediumItalic.ttf */,
 				9DA4C2C1C1A146479B4B31CB /* RadioCanadaBig-Bold.ttf */,
 				C7029B102F04416BB99C6A9E /* RadioCanadaBig-Regular.ttf */,
+				37AA137599F744EABC8104CD /* low 2.mp4 */,
+				24E7F402736343CF9928E6A2 /* low 3.mp4 */,
+				C02546327DC74DADA2183F31 /* low.mp4 */,
+				7DCDE35F079644E3A5EBE629 /* video.mp4 */,
+				30E4A98B415241AB851C224B /* video1.mp4 */,
+				A0D8345DB4FB458ABFDD29A8 /* video2.mp4 */,
+				3B5AC95515AE4155BCDA29BD /* video3.mp4 */,
+				67DF2B5162DB42A1A9CE576F /* video4.mp4 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -274,6 +298,14 @@
 				3C2F5241147447DA88C1B5DF /* OpenSans-MediumItalic.ttf in Resources */,
 				16840593CC7347C4A446BB73 /* RadioCanadaBig-Bold.ttf in Resources */,
 				A9449DF0CD8A442EA4E4FACA /* RadioCanadaBig-Regular.ttf in Resources */,
+				13B16AF7A9944095A585D306 /* low 2.mp4 in Resources */,
+				33591D4EE75D40C2BA0D0EE2 /* low 3.mp4 in Resources */,
+				5807208151784BF5960A7382 /* low.mp4 in Resources */,
+				BAD1757B0FD04420879EA90A /* video.mp4 in Resources */,
+				72DDF341AE4A411882BD20E4 /* video1.mp4 in Resources */,
+				81F421568FE84479B960E9E9 /* video2.mp4 in Resources */,
+				7BAC87AF77984FFBBD3BD728 /* video3.mp4 in Resources */,
+				927336C6E51C4E2F93BB71AF /* video4.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

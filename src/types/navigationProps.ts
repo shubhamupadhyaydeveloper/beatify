@@ -31,11 +31,10 @@ export type HomepageNavigationProp = {
 export type ExploreNavigationProp = {
   SearchResults: undefined;
   ActualExplore: undefined;
-  Reels : {index : number}
 };
 
 export type DrawerNavigationTypes = {
-  Profile: undefined;
+   Index : undefined,
 };
 
 export type LibraryNavigationTypes = {

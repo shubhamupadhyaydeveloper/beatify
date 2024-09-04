@@ -17,15 +17,13 @@ import {
 
 import CustomTouchableOpacity from '../shared/TouchableOpacity';
 import {
-  CreateNavigationTypes,
   ExploreNavigationProp,
 } from 'src/types/navigationProps';
-import {reelsImages} from 'src/constant/mockdata';
+import {musicOptions} from 'src/constant/mockdata';
 
 const Explore = () => {
   const navigation = useNavigation<NavigationProp<ExploreNavigationProp>>();
-  const {width, height} = useWindowDimensions();
-  const mockData = reelsImages.slice(0, 3);
+  const {width:ScreenWidth, height: ScreenHeight} = useWindowDimensions();
 
   return (
     <SafeAreaView className="px-5 mt-[3vh]">
@@ -48,7 +46,7 @@ const Explore = () => {
         className="bg-white flex flex-row items-center py-2 rounded-md mt-[3vh]"
         activeOpacity={0.8}
         onPress={() => navigation.navigate('SearchResults')}>
-        <View style={{marginRight: width * 0.02, marginLeft: width * 0.04}}>
+        <View style={{marginRight: ScreenWidth * 0.02, marginLeft: ScreenWidth * 0.04}}>
           <IonIcons color={'black'} name="search" size={25} />
         </View>
         <Text
@@ -58,16 +56,41 @@ const Explore = () => {
         </Text>
       </TouchableOpacity>
 
-      <View className="flex flex-row gap-2 items-center mt-[2vh]">
-        {mockData.map((item, index) => (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            key={index}
-            className="border border-white"
-            onPress={() => navigation.navigate('Reels',{index : item.id})}>
-            <Image source={{uri: item.image}} style={{height: 150, width: 100}} />
-          </TouchableOpacity>
-        ))}
+      <View className=''>
+        <FlatList
+          ItemSeparatorComponent={() => <View className='h-[10px]'/>}
+          data={musicOptions}
+          keyExtractor={(item, index) => index.toString()}
+          scrollEventThrottle={16}
+          numColumns={2}
+          contentContainerStyle={{
+            paddingHorizontal: ScreenWidth * 0.01,
+            marginTop : 20
+          }}
+          renderItem={({item}) => (
+            <CustomTouchableOpacity>
+
+            <View
+              style={{
+                backgroundColor: item.color,
+                width: ScreenWidth * 0.42,
+                height: 80,
+                marginRight: 10,
+              }}
+              className=" rounded-sm relative overflow-hidden">
+              <View style={{width : ScreenWidth * .25}}>
+
+              <Text className="text-white font-[RadioCanadaBig-Bold] mt-[1vh] ml-[2vw]">
+                {item.name}
+              </Text>
+              </View>
+              <View className='absolute bottom-0 right-[-2vw] rotate-[15deg]'>
+                 <Image source={{uri : item.image}}  style={{width : 60 ,height : 60}} className='rounded-md'/>
+              </View>
+            </View>
+            </CustomTouchableOpacity>
+          )}
+        />
       </View>
     </SafeAreaView>
   );

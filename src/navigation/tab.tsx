@@ -13,7 +13,7 @@ import ExploreIndex from '../homepage/ExploreIndex';
 import Create from '../homepage/Create';
 import LibraryIndex from '../pages/LibraryIndex';
 import CustomDrawerContent from '../pages/DrawerContent';
-import {TabNavigationProps} from 'src/types/navigationProps';
+import {DrawerNavigationTypes, TabNavigationProps} from 'src/types/navigationProps';
 import HompageIndex from 'src/homepage/HompageIndex';
 import CreateIndex from 'src/pages/CreateIndex';
 
@@ -39,7 +39,7 @@ const TabNavigation = () => {
         }}></LinearGradient>
     );
   }
-  const Drawer = createDrawerNavigator();
+  const Drawer = createDrawerNavigator<DrawerNavigationTypes>();
 
   function RenderTab() {
     return (

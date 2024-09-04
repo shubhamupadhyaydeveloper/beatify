@@ -7,7 +7,7 @@ import Library from 'src/homepage/Library'
 import LikedSong from 'src/homepage/LikedSong'
 import Create from 'src/homepage/Create'
 import Test from './Test'
-import Reels from './Reels'
+import Reels from '../reel/Reels'
 
 
 const CreateIndex = () => {
