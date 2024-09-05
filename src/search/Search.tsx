@@ -8,6 +8,7 @@ import {
   Keyboard,
   useWindowDimensions,
   StatusBar,
+  Image,
 } from 'react-native';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -22,6 +23,7 @@ import {chain, debounce} from 'lodash';
 import CustomTouchableOpacity from '@shared/TouchableOpacity';
 import {recentlyData, recentType} from 'src/constant/mockdata';
 import {FlatList} from 'react-native-gesture-handler';
+import EntypoIcon from 'react-native-vector-icons/Entypo'
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState<string>('');
@@ -114,10 +116,14 @@ const Search = () => {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
                   <CustomTouchableOpacity>
-                  <View>
+                  <View style={{width : ScreenWidth * .9}} className=''>
+                     <Image source={{uri : item.image}} className='w-[30px] h-[30px]' />
                     <Text className="text-white font-[RadioCanadaBig-Bold] text-[15px]">
                       {item.name}
                     </Text>
+                    <CustomTouchableOpacity>
+                         <EntypoIcon name='dots-three-vertical' color={secondaryColor} size={25} />
+                    </CustomTouchableOpacity>
                   </View>
                   </CustomTouchableOpacity>
                 )}
