@@ -455,7 +455,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.24.7"
 
-"@babel/plugin-transform-class-properties@^7.24.7":
+"@babel/plugin-transform-class-properties@^7.0.0-0", "@babel/plugin-transform-class-properties@^7.24.7":
   version "7.24.7"
   dependencies:
     "@babel/helper-create-class-features-plugin" "^7.24.7"
@@ -468,7 +468,7 @@
     "@babel/helper-plugin-utils" "^7.24.7"
     "@babel/plugin-syntax-class-static-block" "^7.14.5"
 
-"@babel/plugin-transform-classes@^7.0.0", "@babel/plugin-transform-classes@^7.24.8":
+"@babel/plugin-transform-classes@^7.0.0", "@babel/plugin-transform-classes@^7.0.0-0", "@babel/plugin-transform-classes@^7.24.8":
   version "7.24.8"
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.24.7"
@@ -752,7 +752,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.24.7"
     "@babel/helper-plugin-utils" "^7.24.7"
 
-"@babel/plugin-transform-unicode-regex@^7.0.0", "@babel/plugin-transform-unicode-regex@^7.24.7":
+"@babel/plugin-transform-unicode-regex@^7.0.0", "@babel/plugin-transform-unicode-regex@^7.0.0-0", "@babel/plugin-transform-unicode-regex@^7.24.7":
   version "7.24.7"
   dependencies:
     "@babel/helper-create-regexp-features-plugin" "^7.24.7"
@@ -4967,8 +4967,10 @@ prop-types@^15.7.2, prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-punycode@^2.1.0:
+punycode@^2.1.0, punycode@^2.3.1:
   version "2.3.1"
+  resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz"
+  integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
 pure-rand@^6.0.0:
   version "6.1.0"
@@ -5076,26 +5078,24 @@ react-native-linear-gradient@^2.8.3:
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
   integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
 
-react-native-mmkv@^2.12.2:
-  version "2.12.2"
-  resolved "https://registry.npmjs.org/react-native-mmkv/-/react-native-mmkv-2.12.2.tgz"
-  integrity sha512-6058Aq0p57chPrUutLGe9fYoiDVDNMU2PKV+lLFUJ3GhoHvUrLdsS1PDSCLr00yqzL4WJQ7TTzH+V8cpyrNcfg==
-
 react-native-pager-view@^6.4.1:
   version "6.4.1"
   resolved "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.4.1.tgz"
   integrity sha512-HnDxXTRHnR6WJ/vnOitv0C32KG9MJjxLnxswuQlBJmQ7RxF2GWOHSPIRAdZ9fLxdLstV38z9Oz1C95+t+yXkcg==
 
-react-native-reanimated@^3.14.0, "react-native-reanimated@>= 1.0.0", react-native-reanimated@>=2.2.0:
-  version "3.14.0"
-  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.14.0.tgz"
-  integrity sha512-TAxLtCfRyC/nOLeWoX/8MhdIF+Fi1e1NbLhIgEm5Kv9/gioAwSNaqLUYxjIClU1RaLwSTE8iaiHNVhTU4TS9DA==
+react-native-reanimated@^3.15.1, "react-native-reanimated@>= 1.0.0", react-native-reanimated@>=2.2.0:
+  version "3.15.1"
+  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.15.1.tgz"
+  integrity sha512-DbBeUUExtJ1x1nfE94I8qgDgWjq5ztM3IO/+XFO+agOkPeVpBs5cRnxHfJKrjqJ2MgwhJOUDmtHxo+tDsoeitg==
   dependencies:
     "@babel/plugin-transform-arrow-functions" "^7.0.0-0"
+    "@babel/plugin-transform-class-properties" "^7.0.0-0"
+    "@babel/plugin-transform-classes" "^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator" "^7.0.0-0"
     "@babel/plugin-transform-optional-chaining" "^7.0.0-0"
     "@babel/plugin-transform-shorthand-properties" "^7.0.0-0"
     "@babel/plugin-transform-template-literals" "^7.0.0-0"
+    "@babel/plugin-transform-unicode-regex" "^7.0.0-0"
     "@babel/preset-typescript" "^7.16.7"
     convert-source-map "^2.0.0"
     invariant "^2.2.4"
@@ -5131,7 +5131,7 @@ react-native-video@^6.4.5:
   resolved "https://registry.npmjs.org/react-native-video/-/react-native-video-6.4.5.tgz"
   integrity sha512-pq0oD/lm0NZv/nkQtNy2Bq1eG1+nlb9vVNgdeIz7twDhxLpqiwv4ef39UQlUHfPdnTa9fDyAke6VBc+0ogNjfA==
 
-react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", react-native@>=0.46, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.71.0, react-native@0.74.3:
+react-native@*, "react-native@^0.0.0-0 || >=0.60 <1.0", react-native@>=0.46, react-native@>=0.59, react-native@>=0.60.0, react-native@0.74.3:
   version "0.74.3"
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"
