@@ -24,7 +24,8 @@ type props = {
   labelColor?: string;
   bgColor?: string;
   isShake?: boolean;
-  showError?: boolean
+  showError?: boolean;
+  isSubmitting?: boolean;
 };
 
 const {height} = Dimensions.get('window');

@@ -6,44 +6,72 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from 'src/pages/Header';
 import LottieView from 'lottie-react-native';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {useForm, Controller, FieldValues} from 'react-hook-form';
-import {VerificationTypes} from 'src/types/signup';
-import SharedInput from '@shared/TextInput';
 import SharedButton from '@shared/Button';
 import useGlobalState from 'src/store/globalState';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {AuthNavigationProps} from 'src/types/navigationProps';
+import {port} from 'src/api/client';
+import {notificationState} from 'src/store/notificationState';
+import {primaryColor} from 'src/constant/color';
+
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
 
 type prop = {
   email: string;
 };
 
 const EmailVerification = () => {
+  const {showNofitication} = notificationState();
   const {width, height} = useWindowDimensions();
-  const {setLoggenIn} = useGlobalState()
-
-  const {
-    formState: {errors, isSubmitting},
-    handleSubmit,
-    reset,
-    control,
-  } = useForm({
-    resolver: zodResolver(VerificationTypes),
+  const route = useRoute<RouteProp<AuthNavigationProps, 'EmailVerification'>>();
+  const {email} = route.params;
+  const navigation = useNavigation<NavigationProp<AuthNavigationProps>>();
+  const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: 6});
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
   });
 
-  const handleCodeSubmit = (data: FieldValues) => {
+  const handleCodeSubmit = async () => {
     try {
-      console.log(data);
-      setLoggenIn(true);
-      
-    } catch (error:any) {
-      console.log(error?.message) 
+      const request = await fetch(`${port}/auth/verify-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          otp: value
+        }),
+      });
+
+      if (request.ok) {
+        const response = await request.json();
+        console.log(response);
+        showNofitication('email verified 👌', primaryColor, 'white', 5);
+        navigation.navigate('SignIn');
+      }
+    } catch (error: any) {
+      console.log(error?.message);
+      showNofitication(error?.message, primaryColor, 'white', 5);
     } finally {
-      reset()
+       setValue('')
     }
   };
 
@@ -53,8 +81,8 @@ const EmailVerification = () => {
       className="flex-1 ">
       <SafeAreaView className="bg-white h-full">
         <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        keyboardShouldPersistTaps="handled">
+          contentContainerStyle={{flexGrow: 1}}
+          keyboardShouldPersistTaps="handled">
           <Header title="Verification" />
           <View className="items-center mt-[2vh]">
             <LottieView
@@ -71,33 +99,53 @@ const EmailVerification = () => {
             <Text className="text-[#DBDBDB] font-[RadioCanadaBig-Regular] text-[15px]">
               We have sent the code to
             </Text>
-            <Text className=" text-black text-[12px]">
-              shubhamwork48@gmail.com
-            </Text>
+            <Text className=" text-black text-[12px]">{email}</Text>
           </View>
           <View className=" items-center">
-            <Controller
-              name="code"
-              key="code"
-              control={control}
-              render={({field: {value, onBlur, onChange}}) => (
-                <SharedInput
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  placeholder="Enter code"
-                  label=""
-                  inputWidth={width * 0.8}
-                  keyboardType="numeric"
-                  errorText={errors['code']?.message}
-                  secureText={true}
-                />
+            <CodeField
+              ref={ref}
+              {...props}
+              value={value}
+              onChangeText={setValue}
+              cellCount={6}
+              rootStyle={{marginTop: 20}}
+              // textContentType="none"
+              autoComplete="off"
+              importantForAutofill="no"
+              keyboardType="number-pad"
+              textContentType="oneTimeCode"
+              testID="my-code-input"
+              renderCell={({index, symbol, isFocused}) => (
+                <View
+                  key={index}
+                  className={`mr-2 w-[40px] h-[40px] border rounded-md`}
+                  style={{
+                    borderColor: primaryColor,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  onLayout={getCellOnLayoutHandler(index)}>
+                  <Text
+                    style={{textAlign: 'center', fontSize: 20, color: 'black'}}>
+                    {symbol || (isFocused ? <Cursor /> : null)}
+                  </Text>
+                </View>
               )}
             />
+
             <View className="mt-[3vh]">
               <SharedButton
                 text="Submit"
-                onPress={handleSubmit(handleCodeSubmit)}
+                onPress={() =>
+                  value.length === 6
+                    ? handleCodeSubmit()
+                    : showNofitication(
+                        '6 digit code is required 😒',
+                        primaryColor,
+                        'white',
+                        5,
+                      )
+                }
               />
             </View>
           </View>

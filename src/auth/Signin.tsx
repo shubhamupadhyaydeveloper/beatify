@@ -24,12 +24,19 @@ import bottomSheet from '@gorhom/bottom-sheet';
 import SharedModal from '@shared/Modal';
 import ForgetPassword from 'src/forgetpassword/ForgetPassword';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+// import { client } from 'src/api/client';
+import useGlobalState from 'src/store/globalState';
+import ShowNotification from 'src/notification/Notification';
+import { notificationState } from 'src/store/notificationState';
+import { port } from 'src/api/client';
 
 const SignIn = () => {
+  const {setLoggenIn} = useGlobalState()
   const navigation = useNavigation<NavigationProp<AuthNavigationProps>>();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const {width, height} = useWindowDimensions();
   const snapPoint = ['35%'];
+  const {showNofitication} = notificationState()
 
   const {
     control,
@@ -37,20 +44,40 @@ const SignIn = () => {
     reset,
     handleSubmit,
   } = useForm({
-    resolver: zodResolver(SignInTypes),
+    resolver: zodResolver(SignInTypes)
   });
 
   const handleFormSubmit = async (data: FieldValues) => {
     try {
+       const request = await fetch(`${port}/auth/login`, {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+           email: data.email,
+           password: data.password,
+         }),
+       });
+
+     if(request.ok) {
+        const response = await request.json()
+       
+        setLoggenIn(true)
+         showNofitication('user login success 🔥', primaryColor, 'white');
+     }
+
+
     } catch (error: any) {
-      console.log('error in signin Submit', error?.message);
+      console.log('error in signin ', error?.message);
+      showNofitication(error?.message, '#C80036', 'white', 5);
     } finally {
       reset();
     }
   };
 
   const onLinkPress = () => {
-    navigation.navigate('EmailVerification');
+    navigation.navigate('EmailVerification',{email : "hello"});
   };
 
   const handlePress = () => {
@@ -63,9 +90,7 @@ const SignIn = () => {
         <AppIcon />
       </View>
       <View className="mt-[7vh]">
-        {/* <Text className="text-black mb-[3vh] text-center font-[RadioCanadaBig-Bold] text-[18px]">
-          Sign In
-        </Text> */}
+ 
         <View style={{width: width * 0.85}} className="mx-auto">
           {signinFields.map(item => (
             <Controller
@@ -83,6 +108,9 @@ const SignIn = () => {
                     onChange={onChange}
                     errorText={errors[item.name]?.message}
                     secureText={item.secureText}
+                    showError={true}
+                    isShake={true}
+                    isSubmitting={isSubmitting}
                   />
                 </View>
               )}

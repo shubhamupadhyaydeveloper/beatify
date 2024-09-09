@@ -12,7 +12,9 @@ module.exports = {
           tests: ['./tests/'],
           '@shared': './src/shared',
           "@assets" : "./assets",
-          "src" : "./src"
+          "@types" : "./src/types",
+          "src" : "./src",
+          "@constant" : "./src/constant"
         },
       },
     ],

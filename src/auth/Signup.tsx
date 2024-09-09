@@ -20,8 +20,13 @@ import OAuth from 'src/pages/OAuth';
 import { SignUpTypes } from 'src/types/signup';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { AuthNavigationProps } from 'src/types/navigationProps';
+import { port } from 'src/api/client';
+import { notificationState } from 'src/store/notificationState';
+import axios from 'axios';
+import { escapeRegExp } from 'lodash';
 
 const SignUp = () => {
+  const {showNofitication} = notificationState()
   const {width, height} = useWindowDimensions();
   const navigation = useNavigation<NavigationProp<AuthNavigationProps>>()
   const {
@@ -35,9 +40,29 @@ const SignUp = () => {
 
   const handleFormSubmit = async (data: FieldValues) => {
     try {
-      console.log(data)
+      const request = await fetch(
+        `${port}/auth/signup`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', 
+          },
+          body: JSON.stringify({
+            username: data.username, 
+            email: data.email, 
+            password: data.password, 
+          }),
+        },
+      );
+      
+       if(request.status === 201) {
+          navigation.navigate("EmailVerification",{email : data.email})
+             showNofitication('check your email 🔥',primaryColor,"white",5);
+       }
+
     } catch (error: any) {
-      console.log('error in signin Submit', error?.message);
+      console.log('error in signup Submit', error?.message);
+      showNofitication('user already verified 😒',primaryColor,"white",5);
     } finally {
       reset();
     }
@@ -52,9 +77,7 @@ const SignUp = () => {
         <AppIcon />
       </View>
       <View className="mt-[7vh]">
-        {/* <Text className="text-black mb-[3vh] text-center font-[RadioCanadaBig-Bold] text-[18px]">
-          Sign Up
-        </Text> */}
+
         <View style={{width: width * 0.85}} className="mx-auto">
           {signupFields.map(item => (
             <Controller
@@ -72,6 +95,8 @@ const SignUp = () => {
                     onChange={onChange}
                     errorText={errors[item.name]?.message}
                     secureText={item.secureText}
+                    showError={true}
+                    isShake={true}
                   />
                 </View>
               )}

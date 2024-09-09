@@ -5,7 +5,9 @@
     "paths": {
       "@shared/*": ["src/shared/*"],
       "@assets/*" : ["assets"],
-      "src/*" : ["src/*"]
+      "src/*" : ["src/*"],
+      "@types" : ["src/types"],
+      "@constant" : ["src/constant"]
     }
   }
 }

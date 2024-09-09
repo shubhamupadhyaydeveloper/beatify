@@ -20,15 +20,19 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import Audio from './Audio';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import AppLoader from '../shared/AppLoader';
-import Notification from '@shared/Notification';
+import Notification from 'src/notification/Notification';
 import { createSongFields } from '../constant/createsong';
 import SharedInput from '../shared/TextInput';
 import { primaryColor, secondaryColor, tertiaryColor } from '../constant/color';
 import CustomDropdown from '../shared/Dropdown';
 import SharedButton from '../shared/Button';
+import showNotification from 'src/notification/Notification';
+import { notificationState } from 'src/store/notificationState';
+// import { notificationState } from 'src/store/notificationState';
 
 const Create = () => {
   const navigation = useNavigation()
+  const  {showNofitication} = notificationState()
   const [localState, SetLocalState] = useState({
     imgUrl: '',
     audioUrl: '',
@@ -43,13 +47,13 @@ const Create = () => {
     handleSubmit,
   } = useForm();
 
-  const showAlert = (message: string) => {
-    if (errorMessage) return;
-    SetErrorMessage(message);
-    setTimeout(() => {
-      SetErrorMessage(null);
-    }, 3200);
-  };
+  // const showAlert = (message: string) => {
+  //   if (errorMessage) return;
+  //   SetErrorMessage(message);
+  //   setTimeout(() => {
+  //     SetErrorMessage(null);
+  //   }, 3200);
+  // };
 
   const handlePress = async () => {
     try {
@@ -82,7 +86,9 @@ const Create = () => {
         !localState.imgUrl ||
         !localState.category
       ) {
-        showAlert('All fields are required');
+        // showAlert('All fields are required');
+        // showNotication("All fields are required")
+        showNofitication('All fields are required');
       }
     } catch (error: any) {
       console.log(error, 'error in create form submit');
@@ -106,7 +112,6 @@ const Create = () => {
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       {isSubmitting && <AppLoader />}
-      {errorMessage && <Notification message={errorMessage} />}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView className="px-5 mt-[2vh] h-full ">
           <View className='flex flex-row items-center'>
@@ -204,7 +209,7 @@ const Create = () => {
                   <Text
                     className="ml-2 font-[RadioCanadaBig-Regular]"
                     style={{color: secondaryColor}}>
-                    Choose a file
+                    Choose a filef
                   </Text>
                 </TouchableOpacity>
               </View>

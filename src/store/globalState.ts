@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 type globleStateTypes = {
   loggedIn: boolean;
   setLoggenIn: (value: boolean) => void;
+
 };
 
 const useGlobalState = create<globleStateTypes>()(
@@ -14,8 +15,8 @@ const useGlobalState = create<globleStateTypes>()(
       setLoggenIn: value => set({loggedIn: value}),
     }),
     {
-      name: 'user-auth',
-      storage : createJSONStorage(() => AsyncStorage)
+      name: 'auth-detail',
+      storage: createJSONStorage(() => AsyncStorage),
     },
   ),
 );

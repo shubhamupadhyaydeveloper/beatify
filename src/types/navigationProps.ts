@@ -6,7 +6,7 @@ export type AuthNavigationProps = {
   ForgetPassword: undefined;
   ResetPassword: undefined;
   RegisterSuccess: undefined;
-  EmailVerification: undefined;
+  EmailVerification: {email : string};
 };
 
 export type TabNavigationProps = {
@@ -26,6 +26,10 @@ export type HomepageNavigationProp = {
   SongDetail: {
     data: {name: string; image: string; singer: string; released: string,singerImage : string | string[]};
   };
+  ProfilePage : undefined;
+  EditProfile : undefined,
+  Followers : undefined;
+  Following : undefined
 };
 
 export type ExploreNavigationProp = {
