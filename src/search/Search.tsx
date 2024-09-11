@@ -17,29 +17,25 @@ import {Controller, useForm, FieldValues} from 'react-hook-form';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import {Platform} from 'react-native';
-import Notification from '@shared/Notification';
 import {primaryColor, secondaryColor, tertiaryColor} from '../constant/color';
 import {chain, debounce} from 'lodash';
 import CustomTouchableOpacity from '@shared/TouchableOpacity';
 import {recentlyData, recentType} from 'src/constant/mockdata';
 import {FlatList} from 'react-native-gesture-handler';
-import EntypoIcon from 'react-native-vector-icons/Entypo'
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchResults, setSearchResults] = useState<recentType[]>([]);
   const [cache, setCache] = useState<recentType[]>([]);
 
-
   const {width: ScreenWidth, height: ScreenHeight} = useWindowDimensions();
   const navigation = useNavigation();
-
 
   const getSearchResuts = useCallback(
     debounce((value: string) => {
       const regex = new RegExp(value, 'i');
       const filteredValues = recentlyData.filter(item => regex.test(item.name));
-      console.log('this is search result', filteredValues);
       setSearchResults(filteredValues);
     }, 500),
     [],
@@ -79,7 +75,7 @@ const Search = () => {
           />
         </View>
 
-        <View>
+        <View style={{width : ScreenWidth}}>
           {cache?.length > 0 && searchResults.length === 0 && (
             <View className="items-center justify-center">
               <CustomTouchableOpacity>
@@ -101,11 +97,10 @@ const Search = () => {
             <View
               style={{width: ScreenWidth, height: ScreenHeight}}
               className="items-center justify-center flex">
-               
               <Text className="text-white font-[RadioCanadaBig-Bold] text-[18px]">
                 Play what you love
               </Text>
-              <Text className='text-[#A9A9A9]'>Search for songs</Text>
+              <Text className="text-[#A9A9A9]">Search for songs</Text>
             </View>
           )}
 
@@ -116,15 +111,25 @@ const Search = () => {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
                   <CustomTouchableOpacity>
-                  <View style={{width : ScreenWidth * .9}} className=''>
-                     <Image source={{uri : item.image}} className='w-[30px] h-[30px]' />
-                    <Text className="text-white font-[RadioCanadaBig-Bold] text-[15px]">
-                      {item.name}
-                    </Text>
-                    <CustomTouchableOpacity>
-                         <EntypoIcon name='dots-three-vertical' color={secondaryColor} size={25} />
-                    </CustomTouchableOpacity>
-                  </View>
+                    <View style={{width: ScreenWidth * 0.9}} className="flex flex-row justify-between">
+                      <View className='flex flex-row'>
+
+                      <Image
+                        source={{uri: item.image}}
+                        className="w-[30px] h-[30px]"
+                      />
+                      <Text className="text-white font-[RadioCanadaBig-Bold] text-[15px]">
+                        {item.name}
+                      </Text>
+                      </View>
+                      <CustomTouchableOpacity>
+                        <EntypoIcon
+                          name="dots-three-vertical"
+                          color={secondaryColor}
+                          size={25}
+                        />
+                      </CustomTouchableOpacity>
+                    </View>
                   </CustomTouchableOpacity>
                 )}
                 scrollEventThrottle={16}

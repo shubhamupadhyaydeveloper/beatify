@@ -11,6 +11,7 @@ import ProfilePage from 'src/profile/ProfilePage';
 import EditProfile from 'src/profile/EditProfile';
 import Followers from 'src/profile/Followers';
 import Following from 'src/profile/Following';
+import UseCamera from 'src/profile/UseCamera';
 
 const HompageIndex = () => {
   const Stack = createStackNavigator<HomepageNavigationProp>();
@@ -50,6 +51,11 @@ const HompageIndex = () => {
       <Stack.Screen
         name="Following"
         component={Following}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CameraPage"
+        component={UseCamera}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

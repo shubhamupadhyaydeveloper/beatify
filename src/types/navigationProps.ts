@@ -29,7 +29,8 @@ export type HomepageNavigationProp = {
   ProfilePage : undefined;
   EditProfile : undefined,
   Followers : undefined;
-  Following : undefined
+  Following : undefined;
+  CameraPage : undefined
 };
 
 export type ExploreNavigationProp = {

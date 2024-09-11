@@ -5,7 +5,6 @@ import StackNavigator from './navigation/stack';
 import {Text} from 'react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Notification from './notification/Notification';
 import ShowNotification from './notification/Notification';
 
 function App(): React.JSX.Element {

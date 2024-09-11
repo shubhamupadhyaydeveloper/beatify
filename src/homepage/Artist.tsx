@@ -92,7 +92,7 @@ const Artist = () => {
             paddingVertical: 10,
             zIndex: 30,
             width,
-            paddingTop: 38,
+            paddingTop: height * .05,
           },
           HeaderStyle,
           {

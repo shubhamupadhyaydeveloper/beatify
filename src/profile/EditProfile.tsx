@@ -11,19 +11,22 @@ import {
   PermissionsAndroid,
   Alert,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {HomepageNavigationProp} from 'src/types/navigationProps';
 import {primaryColor, secondaryColor, tertiaryColor} from 'src/constant/color';
-import PhotoOption from './PhotoOption';
 import DocumentPicker from 'react-native-document-picker';
 import {
   useCameraPermission,
   useCameraDevice,
   Camera,
 } from 'react-native-vision-camera';
+import ProfileImage from './ProfileImage';
+import {BlurView} from '@react-native-community/blur';
+import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import PhotoOptions from './PhotoOptions';
 
 const EditProfile = () => {
   const navigation = useNavigation<NavigationProp<HomepageNavigationProp>>();
@@ -31,18 +34,21 @@ const EditProfile = () => {
   const [change, setChange] = useState<string>('Shubham upadhyay');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [image, setImage] = useState<string>('');
-//   const {hasPermission} = useCameraPermission();
-//   const [showCamera, setShowCamera] = useState(false);
-//   const device = useCameraDevice('back');
-//   const camera = useRef<Camera>(null);
+  const [isImageModalVisible, setIsImageModalVisible] = useState(false);
+  // const [photoUri, setPhotoUri] = useState<string | null>(null);
 
-  const onModalClose = () => {
+  const openImageModal = useCallback(() => {
+    setIsImageModalVisible(true);
+  }, []);
+  const closeImageModal = useCallback(() => {
+    setIsImageModalVisible(false);
+  }, []);
+  const closeModal = useCallback(() => {
     setIsVisible(false);
-  };
-
-  const openModal = () => {
+  }, []);
+  const openModal = useCallback(() => {
     setIsVisible(true);
-  };
+  }, []);
 
   const handleImagePress = async () => {
     try {
@@ -60,6 +66,11 @@ const EditProfile = () => {
       }
     }
   };
+
+
+  const handleSetImage = (value : string) => {
+      console.log(value)
+  }
 
 
   return (
@@ -83,13 +94,19 @@ const EditProfile = () => {
         className="relative self-center"
         style={{width: ScreenWidth * 0.3, marginTop: ScreenHeight * 0.05}}>
         {image ? (
-          <View className=" rounded-full items-center justify-center flex">
-            <Image
-              source={{uri: image}}
-              style={{width: 100, height: 100}}
-              className="rounded-full"
-            />
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => {
+              openImageModal();
+            }}>
+            <View className=" rounded-full items-center justify-center flex">
+              <Image
+                source={{uri: image}}
+                style={{width: 100, height: 100}}
+                className="rounded-full"
+              />
+            </View>
+          </TouchableOpacity>
         ) : (
           <View
             style={{width: 100, height: 100}}
@@ -99,6 +116,7 @@ const EditProfile = () => {
             </Text>
           </View>
         )}
+
         <View className="absolute right-0 bottom-0">
           <TouchableOpacity activeOpacity={0.8} onPress={openModal}>
             <View className="w-[30px]  h-[30px] rounded-md bg-white items-center justify-center flex">
@@ -131,71 +149,19 @@ const EditProfile = () => {
         statusBarTranslucent={false}
         visible={isVisible}
         hardwareAccelerated>
-        <View
-          style={{
-            width: ScreenWidth,
-            height: ScreenHeight,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-          }}>
-          <View style={styles.modalContent}>
-            <View className="bg-black w-full h-[5vh] flex flex-row justify-between px-2 items-center">
-              <Text className="text-white  font-[RadioCanadaBig-Bold]"></Text>
-              <TouchableOpacity activeOpacity={0.8} onPress={onModalClose}>
-                <View className="border border-white rounded-md">
-                  <AntDesignIcon name="close" color={primaryColor} size={25} />
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{width: 'auto', marginTop: ScreenHeight * 0.03}}
-              className="self-center items-center">
-              <PhotoOption
-                icon="select1"
-                label="Choose Photo"
-                onPress={handleImagePress}
-              />
-              <PhotoOption icon="camerao" label="Take Photo" />
-              <PhotoOption
-                icon="close"
-                label="Remove Current Photo"
-                onPress={() => {
-                  setIsVisible(false);
-                  setImage('');
-                }}
-              />
-            </View>
-          </View>
-        </View>
+       <PhotoOptions  setImage={handleSetImage} onClose={closeModal} />
       </Modal>
 
- 
+      <Modal
+        animationType="none"
+        transparent={true}
+        statusBarTranslucent={false}
+        visible={isImageModalVisible}
+        hardwareAccelerated>
+        <ProfileImage image={image} onClose={closeImageModal} />
+      </Modal>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  modalContent: {
-    height: '40%',
-    width: '100%',
-    backgroundColor: tertiaryColor,
-    position: 'absolute',
-    bottom: 0,
-  },
-  titleContainer: {
-    height: '16%',
-    backgroundColor: '#464C55',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  title: {
-    color: '#fff',
-    fontSize: 16,
-  },
-});
 
 export default EditProfile;

@@ -26,7 +26,7 @@ import {useNavigation, useTheme} from '@react-navigation/native';
 
 const LikedSong = () => {
   const {dark} = useTheme();
-  const {width, height} = useWindowDimensions();
+  const {width:ScreenWidth, height:ScreenHeight} = useWindowDimensions();
   const {control} = useForm();
   const scrollY = useSharedValue(0);
   const navigation = useNavigation();
@@ -58,7 +58,7 @@ const LikedSong = () => {
   });
 
   return (
-    <View style={{height}} className="">
+    <View style={{height: ScreenHeight}} className="">
       <StatusBar
         translucent
         backgroundColor="rgba(0,0,0,0.5)"
@@ -71,14 +71,14 @@ const LikedSong = () => {
             position: 'absolute',
             paddingVertical: 10,
             zIndex: 30,
-            width,
-            paddingTop: 40,
+            width: ScreenWidth,
+            paddingTop: ScreenHeight * .05,
           },
           HeaderStyle,
           {
             display: 'flex',
             flexDirection: 'row',
-            gap: width * 0.1,
+            gap: ScreenWidth * 0.1,
             alignItems: 'center',
           },
         ]}>
@@ -100,7 +100,7 @@ const LikedSong = () => {
         <LinearGradient
           colors={['rgba(138,43,226,1)', 'rgba(17, 17, 19, 1)']}
           className="px-3"
-          style={{height: height * 0.45}}>
+          style={{height: ScreenHeight * 0.45}}>
           <Animated.View
             style={[SearchStyle]}
             className="flex flex-row mt-[12vh]  mx-auto">
@@ -110,7 +110,7 @@ const LikedSong = () => {
               start={{x: 0, y: 0}}
               end={{x: 1, y: 1}}>
               <View
-                style={{width: width * 0.75, height: 40}}
+                style={{width: ScreenWidth * 0.75, height: 40}}
                 className="flex flex-row items-center px-3">
                 <IonIcons name="search" color={'white'} size={20} />
                 <Controller
@@ -157,42 +157,42 @@ const LikedSong = () => {
 
         {/* // render songs here */}
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here
           </Text>
         </View>
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenHeight * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here
           </Text>
         </View>
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenHeight * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here
           </Text>
         </View>
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenHeight * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here
           </Text>
         </View>
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenHeight * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here
           </Text>
         </View>
         <View
-          style={{width: width * 0.7, marginTop: height * 0.1}}
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenHeight * 0.1}}
           className="mx-auto">
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
             Your liked songs will appear here

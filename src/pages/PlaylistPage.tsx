@@ -93,7 +93,7 @@ const PlaylistPage = () => {
             paddingVertical: 10,
             zIndex: 30,
             width,
-            paddingTop: 40,
+            paddingTop: height * .06,
           },
           HeaderStyle,
           {
