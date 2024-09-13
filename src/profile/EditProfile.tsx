@@ -52,7 +52,6 @@ const EditProfile = () => {
 
   const handleImagePress = async () => {
     try {
-      setIsVisible(false);
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
       });
@@ -69,7 +68,7 @@ const EditProfile = () => {
 
 
   const handleSetImage = (value : string) => {
-      console.log(value)
+     setImage(value)
   }
 
 
@@ -149,7 +148,7 @@ const EditProfile = () => {
         statusBarTranslucent={false}
         visible={isVisible}
         hardwareAccelerated>
-       <PhotoOptions  setImage={handleSetImage} onClose={closeModal} />
+        <PhotoOptions onClose={closeModal} setImage={handleSetImage} handleImagePress={handleImagePress} />
       </Modal>
 
       <Modal

@@ -1,131 +1,161 @@
 import {View, Text, useWindowDimensions, TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSpring,
+  interpolateColor,
   Extrapolation,
   interpolate,
-  interpolateColor,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  withTiming,
+  withSequence,
 } from 'react-native-reanimated';
 import {
   Gesture,
   GestureDetector,
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
-import {rotateX, snapPoint} from 'react-native-redash';
-import {clamp} from 'lodash';
+import IconIcons from 'react-native-vector-icons/Ionicons';
+import CustomTouchableOpacity from '@shared/TouchableOpacity';
 
 type prop = {
-  setImage: (value: string) => void;
   onClose: () => void;
+  setImage : (value : string) => void;
+  handleImagePress : () => void;
 };
 
-const PhotoOptions = ({setImage, onClose}: prop) => {
+const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
+  const scale = useSharedValue(0);
   const {width: ScreenWidth, height: ScreenHeight} = useWindowDimensions();
-  const boxWidth = 200;
-  const side = (ScreenWidth + boxWidth) / 2;
-  const SNAP_POINTS: number[] = [-side, 0, side];
-
-  const bgColorProgress = useSharedValue(0);
-  const x = useSharedValue(0);
-  const y = useSharedValue(0);
-  const savedoffset = useSharedValue({x: 0, y: 0});
-  const scale = useSharedValue(0)
-  const saveScale = useSharedValue(0)
-  const visible =  useSharedValue(true)
+  const [visible, setVisible] = useState(false);
+  const boxLayout = useRef({x: 0, y: 0, width: 0, height: 0});
+  const optionScale = useSharedValue(0.9);
+  const optionOpacity = useSharedValue(0);
 
   useEffect(() => {
-    bgColorProgress.value = withTiming(1, {duration: 250});
+    scale.value = withTiming(50, {duration: 400});
+    optionScale.value = withSequence(
+      withTiming(1.05, {duration: 150}),
+      withTiming(1, {duration: 150}),
+    );
   }, []);
 
-  const backgroundStyle = useAnimatedStyle(() => {
+  const closeBox = () => {
+      scale.value = withTiming(0, {duration: 400});
+      setTimeout(() => {
+        onClose();
+      }, 400);
+  }
+
+  const revelAnimationStyle = useAnimatedStyle(() => {
     return {
-      backgroundColor: interpolateColor(
-        bgColorProgress.value,
-        [0, 1],
-        ['rgba(0,0,0,0.1)', 'rgba(0,0,0,0.9)'],
-      ),
+      transform: [{scale: scale.value}],
     };
   });
 
-  const panGesture = Gesture.Pan()
-    .onStart(() => {
-      savedoffset.value = {
-        x: x.value,
-        y: y.value,
-      };
-    })
-    .onUpdate(e => {
-      (x.value = e.translationX + savedoffset.value.x),
-        (y.value = e.translationY + savedoffset.value.y);
-    })
+  const tapGesture = Gesture.Tap()
     .onEnd(e => {
-      const dest = snapPoint(y.value, e.velocityY, [
-        0,
-        Math.floor((ScreenHeight + 300) / 2),
-      ]);
+      const {x, y} = e;
+      const {x: boxX, y: boxY, width, height} = boxLayout.current;
+      const isOutsideBox =
+        x < boxX || x > boxX + width || y < boxY || y > boxY + height;
 
-      //   console.log("this is dest",dest)
-      console.log('this is x value', x.value);
-      //   console.log("this is y value",y.value)
-      //   console.log(ScreenWidth + 200)
-      console.log('this is velocity x', e.velocityX);
-      console.log(SNAP_POINTS);
-      //   console.log(dest)
-      //   console.log("this is velocity y",e.velocityY)
-      console.log(dest);
-
-      y.value = withSpring(dest, {velocity: e.velocityY});
-      x.value = withSpring(0, {velocity: e.velocityX});
-
-      if (dest === 506) {
-        setTimeout(() => {
-          onClose();
-        }, 200);
+      if (isOutsideBox) {
+         closeBox()
       }
-
-      //   x.value = withSpring(dest,{velocity : e.velocityX})
-      //   y.value = withSpring(0,{velocity : e.velocityY})
     })
     .runOnJS(true);
 
-  const panAnimationStyle = useAnimatedStyle(() => {
+  const optionAnimationStyle = useAnimatedStyle(() => {
     return {
-      transform: [{translateX: x.value}, {translateY: y.value}],
+      opacity: interpolate(scale.value, [0, 50], [0, 1], Extrapolation.CLAMP),
+      transform: [{scale: optionScale.value}],
     };
   });
 
-  const visibleStyle = useAnimatedStyle(() => {
-     return {
-        opacity : visible.value === true ? 1 : 0
-     }
-  })
+  const handleRemoveImage = () => {
+     closeBox()
+     setImage('')
+  }
 
-  const tapGesture = Gesture.Tap().onBegin(() => {
-         visible.value = !visible.value
-  })
+  const handleChooseImage = () => {
+     closeBox()
+     handleImagePress()
+  }
 
   return (
     <GestureHandlerRootView>
-        
-      <Animated.View
-        style={[backgroundStyle, {width: ScreenWidth, height: ScreenHeight}]}
-        className="items-center justify-center flex">
-        <GestureDetector gesture={panGesture}>
-          <Animated.View
-            style={[panAnimationStyle]}
-            className="w-full h-[300px] bg-white items-center justify-center">
-            <Text className="text-black">close</Text>
-          </Animated.View>
-        </GestureDetector>
-      </Animated.View>
-      <TouchableOpacity
-        onPress={onClose}
-        className="absolute top-0 self-center">
-        <Text>close</Text>
-      </TouchableOpacity>
+      <GestureDetector gesture={tapGesture}>
+        <View
+          className="relative "
+          style={{
+            width: ScreenWidth,
+            height: ScreenHeight,
+            backgroundColor: 'rgba(0,0,0,0)',
+          }}>
+          <View
+            className="self-center overflow-hidden rounded-[15px]"
+            style={{
+              marginTop: ScreenHeight * 0.25,
+              width: ScreenWidth * 0.9,
+              height: ScreenHeight * 0.42,
+            }}
+            onLayout={event => {
+              const {x, y, width, height} = event.nativeEvent.layout;
+              boxLayout.current = {x, y, width, height};
+            }}>
+            <Animated.View
+              style={[revelAnimationStyle]}
+              className="absolute bg-hero top-[-3vh] self-center w-[20px] h-[20px] rounded-full"
+            />
+
+            <View className="flex flew-row flex-wrap self-center mt-[2vh]">
+              <CustomTouchableOpacity onPress={handleChooseImage}>
+                <Animated.View
+                  style={[optionAnimationStyle]}
+                  className="items-center"> 
+                  <View className=" w-[90px] h-[90px]   bg-black mt-4 rounded-[15px] items-center justify-center">
+                    <IconIcons color={'#FDB827'} name="image" size={50} />
+                  </View>
+                  <Text className="text-white font-[RadioCanadaBig-Bold] mt-1">
+                    Choose Image
+                  </Text>
+                </Animated.View>
+              </CustomTouchableOpacity>
+
+              <CustomTouchableOpacity>
+                <Animated.View
+                  style={[optionAnimationStyle]}
+                  className="items-center">
+                  <View className=" w-[90px] h-[90px]  bg-black mt-4 rounded-[15px] items-center justify-center">
+                    <IconIcons color={'#1EAFED'} name="camera" size={50} />
+                  </View>
+                  <Text className="text-white font-[RadioCanadaBig-Bold] mt-1">
+                    Take Image
+                  </Text>
+                </Animated.View>
+              </CustomTouchableOpacity>
+
+              <CustomTouchableOpacity onPress={handleRemoveImage}>
+                <Animated.View
+                  style={[optionAnimationStyle]}
+                  className="ml-[30px] items-center">
+                  <View className=" w-[90px] h-[90px]  bg-black mt-4 rounded-[15px] items-center justify-center">
+                    <IconIcons
+                      color={'#F96D00'}
+                      name="close-circle"
+                      size={50}
+                    />
+                  </View>
+                  <Text className="text-white font-[RadioCanadaBig-Bold] mt-1">
+                    Remove Image
+                  </Text>
+                </Animated.View>
+              </CustomTouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </GestureDetector>
     </GestureHandlerRootView>
   );
 };
