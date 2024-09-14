@@ -26,6 +26,7 @@ type props = {
   isShake?: boolean;
   showError?: boolean;
   isSubmitting?: boolean;
+  textColor?: string;
 };
 
 const {height} = Dimensions.get('window');
@@ -44,7 +45,8 @@ const SharedInput = ({
   labelColor,
   bgColor,
   isShake ,
-  showError
+  showError,
+  textColor
 }: props) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const transformValue = useSharedValue(0);
@@ -88,10 +90,11 @@ const SharedInput = ({
         </Text>
         <View className="flex-row items-center  rounded-md px-1" style={{backgroundColor : bgColor ?? "#FAFAFA"}}>
           <TextInput
-            className="flex-1 px-2 text-md text-black  w-[90vw]"
+            className="flex-1 px-2 text-md  w-[90vw]"
             style={{
               fontFamily: 'RadioCanadaBig-Regular',
               textAlignVertical: multiline ? 'top' : 'center',
+              color : textColor ?? "black"
             }}
             placeholder={placeholder}
             placeholderTextColor="#B3B3B9"

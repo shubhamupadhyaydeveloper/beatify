@@ -9,6 +9,8 @@ import Animated, {
   Extrapolation,
   interpolate,
   withSequence,
+  FadeInUp,
+  FadeOutDown,
 } from 'react-native-reanimated';
 import {
   Gesture,
@@ -97,7 +99,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
             className="self-center overflow-hidden rounded-[15px]"
             style={{
               marginTop: ScreenHeight * 0.25,
-              width: ScreenWidth * 0.9,
+              width: ScreenWidth * 0.85,
               height: ScreenHeight * 0.42,
             }}
             onLayout={event => {
@@ -113,8 +115,8 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
               <CustomTouchableOpacity onPress={handleChooseImage}>
                 <Animated.View
                   style={[optionAnimationStyle]}
-                  className="items-center"> 
-                  <View className=" w-[90px] h-[90px]   bg-black mt-4 rounded-[15px] items-center justify-center">
+                  className="items-center">
+                  <View className=" w-[90px] h-[90px] border-[.5px] border-secondary  bg-black mt-4 rounded-[15px] items-center justify-center">
                     <IconIcons color={'#FDB827'} name="image" size={50} />
                   </View>
                   <Text className="text-white font-[RadioCanadaBig-Bold] mt-1">
@@ -127,7 +129,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
                 <Animated.View
                   style={[optionAnimationStyle]}
                   className="items-center">
-                  <View className=" w-[90px] h-[90px]  bg-black mt-4 rounded-[15px] items-center justify-center">
+                  <View className=" w-[90px] h-[90px] border-[.5px] border-secondary  bg-black mt-4 rounded-[15px] items-center justify-center">
                     <IconIcons color={'#1EAFED'} name="camera" size={50} />
                   </View>
                   <Text className="text-white font-[RadioCanadaBig-Bold] mt-1">
@@ -140,7 +142,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
                 <Animated.View
                   style={[optionAnimationStyle]}
                   className="ml-[30px] items-center">
-                  <View className=" w-[90px] h-[90px]  bg-black mt-4 rounded-[15px] items-center justify-center">
+                  <View className=" w-[90px] h-[90px] border-[.5px] border-secondary  bg-black mt-4 rounded-[15px] items-center justify-center">
                     <IconIcons
                       color={'#F96D00'}
                       name="close-circle"
