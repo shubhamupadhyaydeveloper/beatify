@@ -10,17 +10,16 @@ import ShowNotification from './notification/Notification';
 function App(): React.JSX.Element {
   const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
-    // Wait for hydration to complete
-    const unsub = useGlobalState.persist.onFinishHydration(() => {
-      setIsReady(true);
-    });
+  // useEffect(() => {
 
-    // Clean up the subscription
-    return () => {
-      unsub?.();
-    };
-  }, []);
+  //   const unsub = useGlobalState.persist.onFinishHydration(() => {
+  //     setIsReady(true);
+  //   });
+
+  //   return () => {
+  //     unsub?.();
+  //   };
+  // }, []);
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>

@@ -17,10 +17,20 @@ import RegisterSuccessful from 'src/verification/RegisterSuccessful';
 import EmailVerification from 'src/verification/EmailVerification';
 import ForgetPassword from 'src/forgetpassword/ForgetPassword';
 
+const config = {
+  screens : {
+     Song : 'share/song/:songId',
+     Playlist : 'share/playlist/:playlistId'
+  }
+}
+
+const linking = {
+  prefixes: ['http://localhost:3000', ''],
+  config
+};
 
 const StackNavigator = () => {
   const AuthStack = createStackNavigator<AuthNavigationProps>();
-  const AppStack = createStackNavigator<AppNavigationProp>();
   const {loggedIn} = useGlobalState();
 
   const RenderAppStack = () => {
@@ -87,7 +97,7 @@ const StackNavigator = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {loggedIn === true ? <RenderAppStack /> : <RenderAuthStack />}
+      {loggedIn ? <RenderAppStack /> : <RenderAuthStack />}
     </NavigationContainer>
   );
 };

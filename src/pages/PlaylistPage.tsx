@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {HomepageNavigationProp} from 'src/types/navigationProps';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,14 +17,20 @@ import Animated, {
   useSharedValue,
   interpolateColor,
   interpolate,
-  Extrapolate,
   Extrapolation,
 } from 'react-native-reanimated';
+import {ScreenHeight, ScreenWidth} from 'src/hooks/ScreenDimension';
+import CustomTouchableOpacity from '@shared/TouchableOpacity';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import OcticonsIcon from 'react-native-vector-icons/Octicons';
+import CustomModal, {CustomModalRef} from '@shared/CustomModal';
 
 const PlaylistPage = () => {
   const {width, height} = useWindowDimensions();
   const navigation = useNavigation();
   const scrollY = useSharedValue(0);
+
+  const testref = useRef<CustomModalRef>(null);
 
   const scrollHandler = useAnimatedScrollHandler(e => {
     scrollY.value = e.contentOffset.y;
@@ -34,7 +40,7 @@ const PlaylistPage = () => {
     return {
       backgroundColor: interpolateColor(
         scrollY.value,
-        [220, 230],
+        [ScreenHeight * 0.17, ScreenHeight * 0.181],
         ['transparent', '#3C3D37'],
       ),
     };
@@ -42,20 +48,24 @@ const PlaylistPage = () => {
 
   const HeaderTextStyle = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(scrollY.value, [220, 230], [0, 1]),
+      opacity: interpolate(
+        scrollY.value,
+        [ScreenHeight * 0.17, ScreenHeight * 0.181],
+        [0, 1],
+      ),
     };
   });
 
   const ImageStyle = useAnimatedStyle(() => {
     const scrollScale = interpolate(
       scrollY.value,
-      [50, 100],
+      [ScreenHeight * 0.06, ScreenHeight * 0.13],
       [1, 0.5],
       Extrapolation.CLAMP,
     );
     const scrollOpacity = interpolate(
       scrollY.value,
-      [100, 115],
+      [ScreenHeight * 0.13, ScreenHeight * 0.15],
       [1, 0],
       Extrapolation.CLAMP,
     );
@@ -69,8 +79,8 @@ const PlaylistPage = () => {
   const MarginBottomStyle = useAnimatedStyle(() => {
     const scrollMarginBottom = interpolate(
       scrollY.value,
-      [50, 150],
-      [10, -90],
+      [ScreenHeight * 0.06, ScreenHeight * 0.19],
+      [10, -ScreenHeight * 0.12],
       Extrapolation.CLAMP,
     );
 
@@ -81,11 +91,6 @@ const PlaylistPage = () => {
 
   return (
     <View>
-      <StatusBar
-        translucent
-        backgroundColor="rgba(0,0,0,0.5)"
-        barStyle="default"
-      />
       <Animated.View
         style={[
           {
@@ -93,7 +98,7 @@ const PlaylistPage = () => {
             paddingVertical: 10,
             zIndex: 30,
             width,
-            paddingTop: height * .06,
+            paddingTop: height * 0.06,
           },
           HeaderStyle,
           {
@@ -111,7 +116,7 @@ const PlaylistPage = () => {
         </TouchableOpacity>
         <Animated.View className="items-center" style={[HeaderTextStyle]}>
           <Text className="text-white font-[RadioCanadaBig-Bold] text-[16px] text-center">
-            hello how are youdf
+            hello how are you
           </Text>
         </Animated.View>
       </Animated.View>
@@ -120,100 +125,100 @@ const PlaylistPage = () => {
         scrollEventThrottle={16}
         onScroll={scrollHandler}
         showsVerticalScrollIndicator={false}>
+        <StatusBar
+          translucent
+          backgroundColor="rgba(0,0,0,0.5)"
+          barStyle="default"
+        />
         <Animated.View style={[MarginBottomStyle]}>
           <LinearGradient
             colors={['#3C3D37', 'rgba(17, 17, 19, 1)']}
-            style={{height: height * 0.4}}>
-            <View style={{height: 90}} />
+            style={{height: height * 0.38}}>
+            <View style={{height: 80}} />
             <Animated.View
               style={[{width}, ImageStyle]}
-              className="mx-auto flex items-center">
-              <View
-                className=" bg-white"
+              className="flex items-center">
+              <Image
+                source={{
+                  uri: 'https://cdn.pixabay.com/photo/2016/05/24/22/54/icon-1413583_640.png',
+                }}
                 style={{width: width * 0.5, height: height * 0.25}}
               />
             </Animated.View>
           </LinearGradient>
         </Animated.View>
 
-        <View className="w-full p-3 bg-white ">
-          <Text className="text-black">This is fixed</Text>
+        <View className="w-full px-4  ">
+          <Text className="mb-[2vh] text-white font-[RadioCanadaBig-Bold] text-[20px]">
+            My Playlist #1
+          </Text>
+          <View className="w-full flex flex-row justify-between items-center">
+            <CustomTouchableOpacity>
+              <View className="flex flex-row items-center ">
+                <View className="w-[30px] h-[30px] bg-primary rounded-full items-center justify-center">
+                  <Text className="font-[RadioCanadaBig-Bold] text-[13px] text-black">
+                    S
+                  </Text>
+                </View>
+                <Text className="text-white font-[RadioCanadaBig-Bold] text-[13px] ml-2">
+                  Shubham Upadhyay
+                </Text>
+              </View>
+            </CustomTouchableOpacity>
+            <CustomTouchableOpacity
+              onPress={() => testref.current?.toggleVisible()}>
+              <EntypoIcon
+                name="dots-three-vertical"
+                color={'#bdbdbc'}
+                size={20}
+              />
+            </CustomTouchableOpacity>
+          </View>
         </View>
 
-        <View>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
+        <View className="self-center items-center gap-5 mt-[10vh]">
+          <Text className="text-graycolor font-[RadioCanadaBig-Regular] text-[16px]">
+            Lets start building your playlist.
           </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
-          <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
-            This is scrollable
-          </Text>
+          <View style={{width: ScreenWidth * 0.6}}>
+            <CustomTouchableOpacity>
+              <View className="  bg-white items-center justify-center flex py-2  rounded-full">
+                <Text className="text-black font-[RadioCanadaBig-Bold] text-[16px]">
+                  Add to this playlist
+                </Text>
+              </View>
+            </CustomTouchableOpacity>
+          </View>
         </View>
+
+        <CustomModal ref={testref} userSnapPoint={[200]}>
+          <View className="px-4 mt-4">
+            <CustomTouchableOpacity>
+              <View className="flex flex-row items-center">
+                <OcticonsIcon name="pencil" color={'#bdbdbc'} size={25} />
+                <Text className="text-white text-[18px] font-[RadioCanadaBig-Regular] ml-5">
+                  Edit Playlist
+                </Text>
+              </View>
+            </CustomTouchableOpacity>
+            <CustomTouchableOpacity>
+              <View className="flex flex-row items-center mt-5">
+                <AntDesignIcon name="close" color={'#bdbdbc'} size={25} />
+                <Text className="text-white text-[18px] font-[RadioCanadaBig-Regular] ml-5">
+                  Delete Playlist
+                </Text>
+              </View>
+            </CustomTouchableOpacity>
+            <CustomTouchableOpacity>
+              <View className="flex flex-row items-center mt-5">
+                <AntDesignIcon name="sharealt" color={'#bdbdbc'} size={25} />
+                <Text className="text-white text-[18px] font-[RadioCanadaBig-Regular] ml-5">
+                  Share
+                </Text>
+              </View>
+            </CustomTouchableOpacity>
+          </View>
+        </CustomModal>
       </Animated.ScrollView>
     </View>
   );

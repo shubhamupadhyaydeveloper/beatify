@@ -53,7 +53,7 @@ const SharedModal = ({
       index={0}
       handleIndicatorStyle={{
         display: 'flex',
-        backgroundColor: 'white',
+        backgroundColor: '#bdbdbc',
         width: 30,
       }}>
       <BottomSheetView>{children}</BottomSheetView>

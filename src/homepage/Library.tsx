@@ -138,7 +138,7 @@ const Library = () => {
             ))}
           </View>
         )}
-        <View className="w-full border-[1.2px] border-black mt-[3vh]" />
+        <View className="w-full border-[1.2px] border-tertiary mt-[3vh]" />
 
         <TouchableOpacity
           onPress={() => libraryNavigation.navigate('LikedSong')}

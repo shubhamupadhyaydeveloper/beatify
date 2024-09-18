@@ -23,6 +23,16 @@ import CustomTouchableOpacity from '@shared/TouchableOpacity';
 import {recentlyData, recentType} from 'src/constant/mockdata';
 import {FlatList} from 'react-native-gesture-handler';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
+import Animated, {
+  CurvedTransition,
+  FadeInUp,
+  FadeOutUp,
+  FadingTransition,
+  JumpingTransition,
+  LinearTransition,
+  ZoomIn,
+  ZoomOut,
+} from 'react-native-reanimated';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState<string>('');
@@ -35,9 +45,11 @@ const Search = () => {
   const getSearchResuts = useCallback(
     debounce((value: string) => {
       const regex = new RegExp(value, 'i');
-      const filteredValues = recentlyData.filter(item => regex.test(item.name));
+      const filteredValues = recentlyData.filter(
+        item => regex.test(item.name) || regex.test(item.singer),
+      );
       setSearchResults(filteredValues);
-    }, 500),
+    }, 300),
     [],
   );
 
@@ -51,7 +63,7 @@ const Search = () => {
 
   return (
     <>
-      <SafeAreaView className="px-3 ">
+      <SafeAreaView className="">
         <View
           className="items-center flex flex-row absolute px-3 top-0"
           style={{backgroundColor: tertiaryColor, width: ScreenWidth}}>
@@ -75,7 +87,7 @@ const Search = () => {
           />
         </View>
 
-        <View style={{width : ScreenWidth}}>
+        <View style={{width: ScreenWidth}}>
           {cache?.length > 0 && searchResults.length === 0 && (
             <View className="items-center justify-center">
               <CustomTouchableOpacity>
@@ -105,31 +117,42 @@ const Search = () => {
           )}
 
           {searchResults.length > 0 && (
-            <View className="mt-[20vh]">
-              <FlatList
+            <View className="mt-[10vh]" style={{width: ScreenWidth}}>
+              <Animated.FlatList
+                itemLayoutAnimation={JumpingTransition}
                 data={searchResults}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
                   <CustomTouchableOpacity>
-                    <View style={{width: ScreenWidth * 0.9}} className="flex flex-row justify-between">
-                      <View className='flex flex-row'>
-
-                      <Image
-                        source={{uri: item.image}}
-                        className="w-[30px] h-[30px]"
-                      />
-                      <Text className="text-white font-[RadioCanadaBig-Bold] text-[15px]">
-                        {item.name}
-                      </Text>
+                    <Animated.View
+                      entering={FadeInUp}
+                      exiting={FadeOutUp}
+                      layout={JumpingTransition}
+                      style={{width: ScreenWidth * .95}}
+                      className="flex flex-row justify-between items-center self-center w-full">
+                      <View className="flex flex-row items-center">
+                        <Image
+                          source={{uri: item.image}}
+                          className="w-[60px] h-[60px]"
+                        />
+                        <View className='ml-3'>
+                          <Text className="text-white font-[RadioCanadaBig-Regular] text-[15px]">
+                            {item.name}
+                          </Text>
+                          <Text className="text-graycolor font-[RadioCanadaBig-Regular] text-[13px] mt-1">
+                            {item.singer.slice(0, 30)}...
+                          </Text>
+                        </View>
                       </View>
-                      <CustomTouchableOpacity>
+                      <CustomTouchableOpacity
+                        onPress={() => console.log('option click')}>
                         <EntypoIcon
                           name="dots-three-vertical"
-                          color={secondaryColor}
-                          size={25}
+                          color={'#bdbdbc'}
+                          size={20}
                         />
                       </CustomTouchableOpacity>
-                    </View>
+                    </Animated.View>
                   </CustomTouchableOpacity>
                 )}
                 scrollEventThrottle={16}

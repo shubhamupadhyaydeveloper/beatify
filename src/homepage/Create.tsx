@@ -24,7 +24,6 @@ import Notification from 'src/notification/Notification';
 import {createSongFields} from '../constant/createsong';
 import SharedInput from '../shared/TextInput';
 import {primaryColor, secondaryColor, tertiaryColor} from '../constant/color';
-import CustomDropdown from '../shared/Dropdown';
 import SharedButton from '../shared/Button';
 import showNotification from 'src/notification/Notification';
 import {notificationState} from 'src/store/notificationState';
@@ -132,7 +131,7 @@ const Create = () => {
     dropDownHeight.value = withTiming(0, {duration: 150});
     setTimeout(() => {
       setOptionVisible(false);
-    }, 150);
+    }, 10);
   };
 
   const handleToggle = () => {

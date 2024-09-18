@@ -78,7 +78,7 @@ const Artist = () => {
         barStyle="default"
       />
       <Animated.View style={[ImageStyle, {backgroundColor: '#3C3D37'}]}>
-        <Image
+        <Animated.Image
           source={{uri: data?.img}}
           style={{width, height: height * 0.4}}
           className="absolute top-0"
@@ -92,7 +92,7 @@ const Artist = () => {
             paddingVertical: 10,
             zIndex: 30,
             width,
-            paddingTop: height * .05,
+            paddingTop: height * 0.05,
           },
           HeaderStyle,
           {

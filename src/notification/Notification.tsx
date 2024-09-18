@@ -55,7 +55,7 @@ const ShowNotification = () => {
       ]}
       className=" rounded-sm absolute  self-center items-center justify-center mx-auto">
       <Text
-        style={{color: textColor ?? "black", fontSize: 16}}
+        style={{color: textColor ?? "black", fontSize: 14}}
         className="font-[RadioCanadaBig-Regular]">
         {notification}
       </Text>
