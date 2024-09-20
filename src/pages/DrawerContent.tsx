@@ -53,7 +53,7 @@ const CustomDrawerContent = ({props}: {props: any}) => {
               size={27}
               color={secondaryColor}
             />
-            <TouchableOpacity activeOpacity={0.7} className="">
+            <TouchableOpacity activeOpacity={0.7} className="" onPress={() => setLoggenIn(false)}>
               <Text className="font-[RadioCanadaBig-Regular] text-[15px] text-white">
                 Develper Info
               </Text>

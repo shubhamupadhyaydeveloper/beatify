@@ -46,6 +46,7 @@ const TabNavigation = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
+        
           lazy: true,
           tabBarBackground: () => <GradientTabBar />,
           tabBarStyle: {

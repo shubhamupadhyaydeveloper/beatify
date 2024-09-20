@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {cloneElement, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {HomepageNavigationProp} from 'src/types/navigationProps';
@@ -69,7 +69,6 @@ const Artist = () => {
     };
   });
 
-
   return (
     <View>
       <StatusBar
@@ -80,9 +79,9 @@ const Artist = () => {
       <Animated.View style={[ImageStyle, {backgroundColor: '#3C3D37'}]}>
         <Animated.Image
           source={{uri: data?.img}}
-          style={{width, height: height * 0.4}}
+          style={{width, height: 300}}
           className="absolute top-0"
-        />
+      />
       </Animated.View>
 
       <Animated.View

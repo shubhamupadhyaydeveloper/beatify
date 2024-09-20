@@ -14,16 +14,15 @@ import {
   useNavigation,
   DrawerActions,
 } from '@react-navigation/native';
-
 import CustomTouchableOpacity from '../shared/TouchableOpacity';
-import {
-  ExploreNavigationProp,
-} from 'src/types/navigationProps';
+import {ExploreNavigationProp} from 'src/types/navigationProps';
 import {musicOptions} from 'src/constant/mockdata';
+import Animated from 'react-native-reanimated';
+import { sharedElementTransition } from 'src/helper/shared';
 
 const Explore = () => {
   const navigation = useNavigation<NavigationProp<ExploreNavigationProp>>();
-  const {width:ScreenWidth, height: ScreenHeight} = useWindowDimensions();
+  const {width: ScreenWidth, height: ScreenHeight} = useWindowDimensions();
 
   return (
     <SafeAreaView className="px-5 mt-[3vh]">
@@ -46,7 +45,11 @@ const Explore = () => {
         className="bg-white flex flex-row items-center py-2 rounded-md mt-[3vh]"
         activeOpacity={0.8}
         onPress={() => navigation.navigate('SearchResults')}>
-        <View style={{marginRight: ScreenWidth * 0.02, marginLeft: ScreenWidth * 0.04}}>
+        <View
+          style={{
+            marginRight: ScreenWidth * 0.02,
+            marginLeft: ScreenWidth * 0.04,
+          }}>
           <IonIcons color={'black'} name="search" size={25} />
         </View>
         <Text
@@ -56,38 +59,48 @@ const Explore = () => {
         </Text>
       </TouchableOpacity>
 
-      <View className=''>
+      <View className="">
         <FlatList
-          ItemSeparatorComponent={() => <View className='h-[10px]'/>}
+          ItemSeparatorComponent={() => <View className="h-[10px]" />}
           data={musicOptions}
           keyExtractor={(item, index) => index.toString()}
           scrollEventThrottle={16}
           numColumns={2}
           contentContainerStyle={{
             paddingHorizontal: ScreenWidth * 0.01,
-            marginTop : 20
+            marginTop: 20,
           }}
-          renderItem={({item}) => (
-            <CustomTouchableOpacity>
-
-            <View
-              style={{
-                backgroundColor: item.color,
-                width: ScreenWidth * 0.42,
-                height: 80,
-                marginRight: 10,
-              }}
-              className=" rounded-sm relative overflow-hidden">
-              <View style={{width : ScreenWidth * .25}}>
-
-              <Text className="text-white font-[RadioCanadaBig-Bold] mt-[1vh] ml-[2vw]">
-                {item.name}
-              </Text>
+          renderItem={({item, index}) => (
+            <CustomTouchableOpacity
+              onPress={() =>
+                navigation.navigate('SearchSong', {
+                  tagName: `search${index}`,
+                  image: item.image,
+                  searchKeyword: item.name,
+                })
+              }>
+              <View
+                style={{
+                  backgroundColor: item.color,
+                  width: ScreenWidth * 0.42,
+                  height: 80,
+                  marginRight: 10,
+                }}
+                className=" rounded-sm relative overflow-hidden">
+                <View style={{width: ScreenWidth * 0.25}}>
+                  <Text className="text-white font-[RadioCanadaBig-Bold] mt-[1vh] ml-[2vw]">
+                    {item.name}
+                  </Text>
+                </View>
+                <View className="absolute bottom-[1vh] right-[2vw] ">
+                  <Animated.Image
+                    source={{uri: item.image}}
+                    style={{width: 60, height: 60}}
+                    className=""
+                    sharedTransitionTag={`search${index}`}
+                  />
+                </View>
               </View>
-              <View className='absolute bottom-0 right-[-2vw] rotate-[15deg]'>
-                 <Image source={{uri : item.image}}  style={{width : 60 ,height : 60}} className='rounded-md'/>
-              </View>
-            </View>
             </CustomTouchableOpacity>
           )}
         />

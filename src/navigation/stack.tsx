@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Homepage from '../pages/Homepage';
 import SignIn from '../auth/Signin';
@@ -30,7 +30,7 @@ const linking = {
 };
 
 const StackNavigator = () => {
-  const AuthStack = createStackNavigator<AuthNavigationProps>();
+  const AuthStack = createNativeStackNavigator<AuthNavigationProps>();
   const {loggedIn} = useGlobalState();
 
   const RenderAppStack = () => {
@@ -39,16 +39,20 @@ const StackNavigator = () => {
 
   const RenderAuthStack = () => {
     return (
-      <AuthStack.Navigator initialRouteName="Onboarding">
+      <AuthStack.Navigator initialRouteName="Onboarding" screenOptions={{
+         gestureEnabled : true,
+         animation : "slide_from_right",
+        
+      }}>
         <AuthStack.Screen
           name="Onboarding"
           component={Homepage}
-          options={{headerShown: false}}
+          options={{headerShown: false,}}
         />
         <AuthStack.Screen
           name="SignIn"
           component={SignIn}
-          options={{headerShown: false}}
+          options={{headerShown: false,}}
         />
         <AuthStack.Screen
           name="AuthPage"

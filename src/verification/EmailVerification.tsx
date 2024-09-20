@@ -7,6 +7,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -31,6 +32,7 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import Animated from 'react-native-reanimated';
 
 type prop = {
   email: string;
@@ -148,6 +150,7 @@ const EmailVerification = () => {
                 }
               />
             </View>
+
           </View>
         </ScrollView>
       </SafeAreaView>

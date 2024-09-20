@@ -24,18 +24,26 @@ export type HomepageNavigationProp = {
   ActualPage: undefined;
   Artist: {data: {name: string; img: string}};
   SongDetail: {
-    data: {name: string; image: string; singer: string; released: string,singerImage : string | string[]};
+    data: {
+      name: string;
+      image: string;
+      singer: string;
+      released: string;
+      singerImage: string | string[];
+    };
   };
-  ProfilePage : undefined;
-  EditProfile : undefined,
-  Followers : undefined;
-  Following : undefined;
-  CameraPage : undefined
+  ProfilePage: undefined;
+  EditProfile: undefined;
+  Followers: undefined;
+  Following: undefined;
+  CameraPage: undefined;
+  ProfileImage : {image : string,tagName : string};
 };
 
 export type ExploreNavigationProp = {
   SearchResults: undefined;
   ActualExplore: undefined;
+  SearchSong:{tagName : string,image : string,searchKeyword : string}
 };
 
 export type DrawerNavigationTypes = {
@@ -47,7 +55,9 @@ export type LibraryNavigationTypes = {
   LikedSong: undefined;
   SelectArtist : undefined;
   PlaylistPage : undefined;
-  CreatePlaylist : undefined
+  CreatePlaylist : undefined;
+  EditPlaylist : undefined;
+  AddSongs : undefined;
 };
 
 export type CreateNavigationTypes = {

@@ -33,23 +33,27 @@ import Animated, {
   ZoomIn,
   ZoomOut,
 } from 'react-native-reanimated';
+import LottieView from 'lottie-react-native';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchResults, setSearchResults] = useState<recentType[]>([]);
   const [cache, setCache] = useState<recentType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {width: ScreenWidth, height: ScreenHeight} = useWindowDimensions();
   const navigation = useNavigation();
 
   const getSearchResuts = useCallback(
     debounce((value: string) => {
+      setIsLoading(true);
       const regex = new RegExp(value, 'i');
       const filteredValues = recentlyData.filter(
         item => regex.test(item.name) || regex.test(item.singer),
       );
       setSearchResults(filteredValues);
-    }, 300),
+      setIsLoading(false);
+    }, 100),
     [],
   );
 
@@ -105,15 +109,25 @@ const Search = () => {
             </View>
           )}
 
-          {cache?.length === 0 && searchResults.length === 0 && (
-            <View
-              style={{width: ScreenWidth, height: ScreenHeight}}
-              className="items-center justify-center flex">
-              <Text className="text-white font-[RadioCanadaBig-Bold] text-[18px]">
-                Play what you love
-              </Text>
-              <Text className="text-[#A9A9A9]">Search for songs</Text>
+          {isLoading ? (
+            <View className='h-full w-full items-center justify-center'>
+              <LottieView
+                style={{width: ScreenWidth * 0.9, height: ScreenHeight * 0.35}}
+                source={require('../../assets/gifs/loading.json')}
+                autoPlay
+                loop
+              />
             </View>
+          ) : (
+            searchResults.length === 0 && (
+              <View className="h-full w-full items-center justify-center">
+                <Text className="text-white font-[RadioCanadaBig-Bold] text-[18px]">
+                  {searchInput.length > 0 && searchResults.length === 0
+                    ? `No result ${searchInput}`
+                    : 'Play what you love'}
+                </Text>
+              </View>
+            )
           )}
 
           {searchResults.length > 0 && (
@@ -122,20 +136,20 @@ const Search = () => {
                 itemLayoutAnimation={JumpingTransition}
                 data={searchResults}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({item}) => (
+                renderItem={({item, index}) => (
                   <CustomTouchableOpacity>
                     <Animated.View
-                      entering={FadeInUp}
-                      exiting={FadeOutUp}
+                      entering={FadeInUp.delay(50 * index)}
+                      exiting={FadeOutUp.delay(50 * index)}
                       layout={JumpingTransition}
-                      style={{width: ScreenWidth * .95}}
+                      style={{width: ScreenWidth * 0.95}}
                       className="flex flex-row justify-between items-center self-center w-full">
                       <View className="flex flex-row items-center">
                         <Image
                           source={{uri: item.image}}
                           className="w-[60px] h-[60px]"
                         />
-                        <View className='ml-3'>
+                        <View className="ml-3">
                           <Text className="text-white font-[RadioCanadaBig-Regular] text-[15px]">
                             {item.name}
                           </Text>

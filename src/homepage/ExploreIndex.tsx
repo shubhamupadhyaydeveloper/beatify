@@ -1,13 +1,15 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+
 import {ExploreNavigationProp} from 'src/types/navigationProps';
 import Explore from './Explore';
 import Search from 'src/search/Search';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SearchSong from 'src/pages/SearchSong';
 
 const ExploreIndex = () => {
-  const Stack = createStackNavigator<ExploreNavigationProp>();
+  const Stack = createNativeStackNavigator<ExploreNavigationProp>();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{animation: 'slide_from_right'}}>
       <Stack.Screen
         name="ActualExplore"
         component={Explore}
@@ -16,6 +18,11 @@ const ExploreIndex = () => {
       <Stack.Screen
         name="SearchResults"
         component={Search}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchSong"
+        component={SearchSong}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

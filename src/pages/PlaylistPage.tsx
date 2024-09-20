@@ -7,8 +7,8 @@ import {
   Image,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {HomepageNavigationProp} from 'src/types/navigationProps';
+import {NavigationProp, RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {HomepageNavigationProp, LibraryNavigationTypes} from 'src/types/navigationProps';
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import Animated, {
@@ -27,7 +27,7 @@ import CustomModal, {CustomModalRef} from '@shared/CustomModal';
 
 const PlaylistPage = () => {
   const {width, height} = useWindowDimensions();
-  const navigation = useNavigation();
+ const navigation = useNavigation<NavigationProp<LibraryNavigationTypes>>();
   const scrollY = useSharedValue(0);
 
   const testref = useRef<CustomModalRef>(null);
@@ -193,7 +193,7 @@ const PlaylistPage = () => {
 
         <CustomModal ref={testref} userSnapPoint={[200]}>
           <View className="px-4 mt-4">
-            <CustomTouchableOpacity>
+            <CustomTouchableOpacity onPress={() => navigation.navigate("EditPlaylist")}>
               <View className="flex flex-row items-center">
                 <OcticonsIcon name="pencil" color={'#bdbdbc'} size={25} />
                 <Text className="text-white text-[18px] font-[RadioCanadaBig-Regular] ml-5">

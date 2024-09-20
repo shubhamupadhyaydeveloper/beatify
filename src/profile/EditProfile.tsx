@@ -23,7 +23,7 @@ import {
   useCameraDevice,
   Camera,
 } from 'react-native-vision-camera';
-import ProfileImage from './ProfileImage';
+import ProfileImage from './PanImage';
 import {BlurView} from '@react-native-community/blur';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import PhotoOptions from './PhotoOptions';
