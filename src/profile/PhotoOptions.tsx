@@ -19,6 +19,7 @@ import {
 } from 'react-native-gesture-handler';
 import IconIcons from 'react-native-vector-icons/Ionicons';
 import CustomTouchableOpacity from '@shared/TouchableOpacity';
+import ImagePicker from 'react-native-image-crop-picker';
 
 type prop = {
   onClose: () => void;
@@ -33,6 +34,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
   const boxLayout = useRef({x: 0, y: 0, width: 0, height: 0});
   const optionScale = useSharedValue(0.9);
   const optionOpacity = useSharedValue(0);
+
 
   useEffect(() => {
     scale.value = withTiming(50, {duration: 400});
@@ -85,6 +87,24 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
      handleImagePress()
   }
 
+  const takeImage = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    })
+      .then(image => {
+        setImage(image.path);
+        
+      })
+      .catch(err => {
+        console.log('Error opening camera: ', err);
+      })
+      .finally(() => {
+        closeBox()
+      })
+  };
+
   return (
     <GestureHandlerRootView>
       <GestureDetector gesture={tapGesture}>
@@ -125,7 +145,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
                 </Animated.View>
               </CustomTouchableOpacity>
 
-              <CustomTouchableOpacity>
+              <CustomTouchableOpacity onPress={takeImage}>
                 <Animated.View
                   style={[optionAnimationStyle]}
                   className="items-center">

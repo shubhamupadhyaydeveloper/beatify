@@ -16,17 +16,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {HomepageNavigationProp} from 'src/types/navigationProps';
-import {primaryColor, secondaryColor, tertiaryColor} from 'src/constant/color';
-import DocumentPicker from 'react-native-document-picker';
-import {
-  useCameraPermission,
-  useCameraDevice,
-  Camera,
-} from 'react-native-vision-camera';
 import ProfileImage from './PanImage';
-import {BlurView} from '@react-native-community/blur';
-import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import PhotoOptions from './PhotoOptions';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const EditProfile = () => {
   const navigation = useNavigation<NavigationProp<HomepageNavigationProp>>();
@@ -50,27 +42,23 @@ const EditProfile = () => {
     setIsVisible(true);
   }, []);
 
-  const handleImagePress = async () => {
-    try {
-      const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.images],
+  const handleImagePress = useCallback(async () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    })
+      .then(image => {
+        setImage(image.path);
+      })
+      .catch(error => {
+        console.log('error in select image', error);
       });
+  }, []);
 
-      if (res[0]?.uri) {
-        setImage(res[0]?.uri);
-      }
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        console.log('User canceled audio selection');
-      }
-    }
+  const handleSetImage = (value: string) => {
+    setImage(value);
   };
-
-
-  const handleSetImage = (value : string) => {
-     setImage(value)
-  }
-
 
   return (
     <SafeAreaView>
@@ -148,7 +136,11 @@ const EditProfile = () => {
         statusBarTranslucent={false}
         visible={isVisible}
         hardwareAccelerated>
-        <PhotoOptions onClose={closeModal} setImage={handleSetImage} handleImagePress={handleImagePress} />
+        <PhotoOptions
+          onClose={closeModal}
+          setImage={handleSetImage}
+          handleImagePress={handleImagePress}
+        />
       </Modal>
 
       <Modal

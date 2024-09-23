@@ -5,24 +5,21 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { notificationState } from 'src/store/notificationState';
-
-
-
+import {notificationState} from 'src/store/notificationState';
 
 const ShowNotification = () => {
-  const {width,height} = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
   const sharedOpacity = useSharedValue(0);
-  const {notification, removeNofitication,bgColor,textColor,position} = notificationState();
+  const {notification, removeNofitication, bgColor, textColor, position} =
+    notificationState();
 
-   useEffect(() => {
-     if (notification) {
-       handleStart();
-       setTimeout(() => handleEnd(), 2900);
-       setTimeout(() => removeNofitication(), 3000);
-     }
-   }, [notification]);
-
+  useEffect(() => {
+    if (notification) {
+      handleStart();
+      setTimeout(() => handleEnd(), 2900);
+      setTimeout(() => removeNofitication(), 3000);
+    }
+  }, [notification]);
 
   const slideStyle = useAnimatedStyle(() => {
     return {
@@ -49,13 +46,13 @@ const ShowNotification = () => {
           margin: 'auto',
           zIndex: 10,
           backgroundColor: bgColor ?? 'white',
-          bottom : position ?? height * .08
+          bottom: position ?? height * 0.08,
         },
         slideStyle,
       ]}
       className=" rounded-sm absolute  self-center items-center justify-center mx-auto">
       <Text
-        style={{color: textColor ?? "black", fontSize: 14}}
+        style={{color: textColor ?? 'black', fontSize: 14}}
         className="font-[RadioCanadaBig-Regular]">
         {notification}
       </Text>

@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 import {persist,createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { mmkyStroage } from './mmkv';
 
 type globleStateTypes = {
   loggedIn: boolean;
@@ -15,8 +15,8 @@ const useGlobalState = create<globleStateTypes>()(
       setLoggenIn: value => set({loggedIn: value}),
     }),
     {
-      name: 'auth-detail',
-      storage: createJSONStorage(() => AsyncStorage),
+      name: 'auth-store',
+      storage: createJSONStorage(() => mmkyStroage),
     },
   ),
 );
