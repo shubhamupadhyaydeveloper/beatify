@@ -13,7 +13,10 @@ import ExploreIndex from '../homepage/ExploreIndex';
 import Create from '../homepage/Create';
 import LibraryIndex from '../pages/LibraryIndex';
 import CustomDrawerContent from '../pages/DrawerContent';
-import {DrawerNavigationTypes, TabNavigationProps} from 'src/types/navigationProps';
+import {
+  DrawerNavigationTypes,
+  TabNavigationProps,
+} from 'src/types/navigationProps';
 import HompageIndex from 'src/homepage/HompageIndex';
 import CreateIndex from 'src/pages/CreateIndex';
 
@@ -46,7 +49,6 @@ const TabNavigation = () => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
-        
           lazy: true,
           tabBarBackground: () => <GradientTabBar />,
           tabBarStyle: {

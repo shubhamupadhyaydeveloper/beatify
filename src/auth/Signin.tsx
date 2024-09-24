@@ -17,18 +17,19 @@ import {signinFields} from 'src/constant/auth';
 import SharedInput from '@shared/TextInput';
 import SharedButton from '@shared/Button';
 import OAuth from 'src/pages/OAuth';
-import {SignInTypes} from 'src/types/signin';
+import {loginApiType, SignInTypes} from 'src/types/signin';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthNavigationProps} from 'src/types/navigationProps';
 import bottomSheet from '@gorhom/bottom-sheet';
 import SharedModal from '@shared/Modal';
 import ForgetPassword from 'src/forgetpassword/ForgetPassword';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
-// import { client } from 'src/api/client';
 import useGlobalState from 'src/store/globalState';
 import ShowNotification from 'src/notification/Notification';
 import { notificationState } from 'src/store/notificationState';
 import { port } from 'src/api/client';
+import axios from 'axios';
+import { loginApi } from 'src/api/loginapi';
 
 const SignIn = () => {
   const {setLoggenIn} = useGlobalState()
@@ -49,27 +50,11 @@ const SignIn = () => {
 
   const handleFormSubmit = async (data: FieldValues) => {
     try {
-       const request = await fetch(`${port}/auth/login`, {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-           email: data.email,
-           password: data.password,
-         }),
-       });
-
-     if(request.ok) {
-        const response = await request.json()
-       
-        setLoggenIn(true)
+    const accessToken = await loginApi(data.email,data.password)
+     if(accessToken) {
          showNofitication('user login success 🔥', primaryColor, 'white');
      }
-
-
     } catch (error: any) {
-      console.log('error in signin ', error?.message);
       showNofitication(error?.message, '#C80036', 'white', 5);
     } finally {
       reset();
