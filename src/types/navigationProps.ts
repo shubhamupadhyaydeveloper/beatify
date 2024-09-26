@@ -26,8 +26,8 @@ export type HomepageNavigationProp = {
       name: string;
       image: string;
       singer: string;
-      released: string;
-      singerImage: string | string[];
+      released?: string;
+      singerImage?: string | string[];
     };
   };
   ProfilePage: undefined;

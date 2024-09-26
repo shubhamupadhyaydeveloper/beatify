@@ -32,7 +32,6 @@ import axios from 'axios';
 import { loginApi } from 'src/api/loginapi';
 
 const SignIn = () => {
-  const {setLoggenIn} = useGlobalState()
   const navigation = useNavigation<NavigationProp<AuthNavigationProps>>();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const {width, height} = useWindowDimensions();

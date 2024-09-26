@@ -1,18 +1,26 @@
 import {create} from 'zustand';
-import {persist,createJSONStorage } from 'zustand/middleware';
-import { mmkyStroage } from './mmkv';
+import {persist, createJSONStorage} from 'zustand/middleware';
+import {mmkyStroage} from './mmkv';
 
 type globleStateTypes = {
-  loggedIn: boolean;
-  setLoggenIn: (value: boolean) => void;
-
+  userId: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
+  setToken: (accessToken: string, refreshToken: string, userId?: string) => void;
 };
 
 const useGlobalState = create<globleStateTypes>()(
   persist(
     set => ({
-      loggedIn: false,
-      setLoggenIn: value => set({loggedIn: value}),
+      userId: null,
+      accessToken: null,
+      refreshToken: null,
+      setToken: (accessToken, refreshToken, userId) =>
+        set({
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+          userId: userId,
+        }),
     }),
     {
       name: 'auth-store',

@@ -7,5 +7,4 @@ export const requestPermission = async () => {
   await notifee.setBadgeCount(0);
   await messaging().registerDeviceForRemoteMessages();
   const token = await messaging().getToken();
-  console.log('this is token', token);
 };

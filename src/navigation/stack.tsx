@@ -14,13 +14,13 @@ type stackScreenType = {
 
 const config = {
   screens: {
-    Song: 'share/song/:songId',
-    Playlist: 'share/playlist/:playlistId',
+    SongDetail: 'sharelink/song/:songId',
+    // Playlist: 'sharelink/playlist/:playlistId',
   },
 };
 
 const linking = {
-  prefixes: ['http://localhost:3000', ''],
+  prefixes: ['http://localhost:3000', 'http://192.168.1.109:3000'],
   config,
 };
 
@@ -36,7 +36,7 @@ const StackNavigator = () => {
   };
 
   return (
-    <NavigationContainer ref={navigationRef} theme={MyTheme}>
+    <NavigationContainer linking={linking} ref={navigationRef} theme={MyTheme}>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
         initialRouteName="SplashScreen">

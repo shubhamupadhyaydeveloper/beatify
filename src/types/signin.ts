@@ -34,4 +34,11 @@ export const ForgetPasswordTypes = z.object({
 export type loginApiType = {
   accesstoken: string;
   refreshtoken: string;
+  userId: string
+};
+
+export type refreshApiType = {
+  refreshToken: string;
+  accessToken: string;
+  message: string
 };

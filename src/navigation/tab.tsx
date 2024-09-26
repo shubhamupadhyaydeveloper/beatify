@@ -2,7 +2,6 @@ import {View, Text, StyleSheet, useWindowDimensions, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import EncytoIcon from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
@@ -10,7 +9,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import ExploreIndex from '../homepage/ExploreIndex';
-import Create from '../homepage/Create';
 import LibraryIndex from '../pages/LibraryIndex';
 import CustomDrawerContent from '../pages/DrawerContent';
 import {
