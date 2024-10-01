@@ -1,1 +1,1 @@
-export const port = 'https://beatify-9fmh.onrender.com';
+export const port = 'http://192.168.1.110:3000';
