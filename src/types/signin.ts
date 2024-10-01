@@ -30,3 +30,15 @@ export const ResetPasswordTypes = z
 export const ForgetPasswordTypes = z.object({
    forgetemail : z.string().email()
 })
+
+export type loginApiType = {
+  accessToken: string;
+  refreshToken: string;
+  userId: string;
+};
+
+export type refreshApiType = {
+  refreshToken: string;
+  accessToken: string;
+  message: string
+};

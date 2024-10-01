@@ -7,8 +7,7 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {setNavColor} from 'src/hooks/NavColor';
-import useGlobalState from 'src/store/globalState';
-// import {resetAndNavigate} from 'src/navigation/navigaionutils';
+import {resetAndNavigate} from 'src/navigation/navigaionutils';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -18,113 +17,103 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-// import {jwtDecode} from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import {notificationState} from 'src/store/notificationState';
 import {primaryColor} from 'src/constant/color';
-import { resetAndNavigate } from 'src/navigation/navigationInitial';
-// import {refreshTokenApi} from 'src/api/loginapi';
-// import {extractTypeAndId} from 'src/hooks/extract';
-// import {getReelDataApi} from 'src/api/inappapi';
+import {extractTypeAndId} from 'src/hooks/extract';
+import {getReelDataApi} from 'src/api/inappapi';
+import {mmkyStroage} from 'src/store/mmkv';
+import {refreshTokenapi} from 'src/api/loginapi';
 
 type Decoded = {
   exp: number;
 };
 
 const SplashScreen = () => {
-  const {loggedIn} = useGlobalState();
+  const accessToken = mmkyStroage.getItem('accessToken');
+  const refreshToken = mmkyStroage.getItem('refreshToken');
   const {width, height} = useWindowDimensions();
   setNavColor({color: '#111113'});
   const initialRender = useSharedValue(0);
   const {showNofitication} = notificationState();
 
-//   const checkToken = () => {
-
-//     if (accessToken) {
-//       const decodedAccessToken = jwtDecode<Decoded>(accessToken);
-//       const decodedRefreshToken = jwtDecode<Decoded>(refreshToken!);
-
-//       const currentTime = Date.now() / 1000;
-
-//       if (decodedRefreshToken?.exp < currentTime) {
-//         resetAndNavigate('Auth');
-//         showNofitication('Session Expiry,Please Login', primaryColor, 'white');
-//         return false;
-//       }
-
-//       if (decodedAccessToken?.exp < currentTime) {
-//         try {
-//           refreshTokenApi();
-//         } catch (error: any) {
-//           console.log('error in refresh token', error?.message);
-//           return false;
-//         }
-//       }
-//       resetAndNavigate('App');
-//       return true;
-//     } else {
-//       resetAndNavigate('Auth');
-//       return false;
-//     }
-//   };
-
-//   const handleDeepLink = async (event: any, deepLinkType: string) => {\
-//     const tokenValid = checkToken();
-//     if (!tokenValid) return;
-
-//     const {url} = event;
-//     if (!url) {
-//       handleNoUrlCase(deepLinkType);
-//       return;
-//     }
-
-//     const {type, id} = extractTypeAndId(url);
-
-//     switch (type) {
-//       case 'song':
-//         await getReelDataApi(id, deepLinkType);
-//         break;
-//       default:
-//         handleDefaultCase(deepLinkType);
-//         break;
-//     }
-//   };
-
-//   const handleNoUrlCase = (deepLinkType: string) => {
-//     if (deepLinkType !== 'RESUME') {
-//       resetAndNavigate('BottomTab');
-//     }
-//   };
-
-//   const handleDefaultCase = (deepLinkType: string) => {
-//     if (deepLinkType !== 'RESUME') {
-//       resetAndNavigate('BottomTab');
-//     }
-//   };
-
-//   useEffect(() => {
-//     Linking.getInitialURL().then(url => {
-//       handleDeepLink({url}, 'CLOSE');
-//     });
-
-//     Linking.addEventListener('url', event => handleDeepLink(event, 'RESUME'));
-//   }, []);
-
   const checkToken = () => {
-     if(loggedIn) {
-        resetAndNavigate("App")
-     } else {
-        resetAndNavigate("Auth")
-     }
-  }
-  
+    if (accessToken) {
+      const decodedAccessToken = jwtDecode<Decoded>(accessToken);
+      const decodedRefreshToken = jwtDecode<Decoded>(refreshToken!);
+
+      const currentTime = Date.now() / 1000;
+
+      if (decodedRefreshToken?.exp < currentTime) {
+        resetAndNavigate('Auth');
+        showNofitication('Session Expiry,Please Login', primaryColor, 'white');
+        return false;
+      }
+
+      if (decodedAccessToken?.exp < currentTime) {
+        try {
+          refreshTokenapi();
+        } catch (error: any) {
+          console.log('error in refresh token', error?.message);
+          return false;
+        }
+      }
+      resetAndNavigate('App');
+      return true;
+    } else {
+      resetAndNavigate('Auth');
+      return false;
+    }
+  };
+
+  const handleDeepLink = async (event: any, deepLinkType: string) => {
+    const tokenValid = checkToken();
+    if (!tokenValid) return;
+
+    const {url} = event;
+    if (!url) {
+      handleNoUrlCase(deepLinkType);
+      return;
+    }
+
+    const {type, id} = extractTypeAndId(url);
+
+    switch (type) {
+      case 'song':
+        await getReelDataApi(id, deepLinkType);
+        break;
+      default:
+        handleDefaultCase(deepLinkType);
+        break;
+    }
+  };
+
+  const handleNoUrlCase = (deepLinkType: string) => {
+    if (deepLinkType !== 'RESUME') {
+      resetAndNavigate('BottomTab');
+    }
+  };
+
+  const handleDefaultCase = (deepLinkType: string) => {
+    if (deepLinkType !== 'RESUME') {
+      resetAndNavigate('BottomTab');
+    }
+  };
+
+  // useEffect(() => {
+  //   Linking.getInitialURL().then(url => {
+  //     handleDeepLink({url}, 'CLOSE');
+  //   });
+
+  //   Linking.addEventListener('url', event => handleDeepLink(event, 'RESUME'));
+  // }, []);
+
   useEffect(() => {
     initialRender.value = withSpring(1, {
       mass: 0.5,
       stiffness: 200,
       damping: 10,
     });
-    
-
 
     const timeOut = setTimeout(() => checkToken(), 2000);
     return () => clearTimeout(timeOut);

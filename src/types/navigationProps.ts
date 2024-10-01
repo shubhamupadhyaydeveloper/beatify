@@ -1,11 +1,9 @@
 export type AuthNavigationProps = {
   SignIn: undefined;
-  Onboarding: undefined;
   AuthPage: undefined;
   SignUp: undefined;
   ForgetPassword: undefined;
   ResetPassword: undefined;
-  RegisterSuccess: undefined;
   EmailVerification: {email : string};
 };
 
@@ -28,8 +26,8 @@ export type HomepageNavigationProp = {
       name: string;
       image: string;
       singer: string;
-      released: string;
-      singerImage: string | string[];
+      released?: string;
+      singerImage?: string | string[];
     };
   };
   ProfilePage: undefined;

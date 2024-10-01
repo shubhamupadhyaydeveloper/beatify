@@ -1,33 +1,32 @@
 import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import useGlobalState from '../store/globalState';
-import Appstack from './tab';
-import Authstack from './AuthStack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Appstack from './tab'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { navigationRef } from './navigaionutils';
+import { AuthStack } from './authstack';
 import SplashScreen from 'src/auth/SplashScreen';
-import { navigationRef } from './navigationInitial';
+
 const config = {
-  screens: {
-    Song: 'share/song/:songId',
-    Playlist: 'share/playlist/:playlistId',
-  },
-};
+  screens : {
+     Song : 'share/song/:songId',
+     Playlist : 'share/playlist/:playlistId'
+  }
+}
 
-const linking = {
-  prefixes: ['http://localhost:3000', ''],
-  config,
-};
-
-type stack = {
+type stackScreenType = {
   SplashScreen: undefined;
   Auth: undefined;
   App: undefined;
 };
 
-const StackNavigator = () => {
-  const Stack = createNativeStackNavigator<stack>();
-  const {loggedIn} = useGlobalState();
+const linking = {
+  prefixes: ['http://localhost:3000', ''],
+  config
+};
 
+const StackNavigator = () => {
+
+ const Stack = createNativeStackNavigator<stackScreenType>();
   const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -37,13 +36,13 @@ const StackNavigator = () => {
   };
 
   return (
-    <NavigationContainer ref={navigationRef} theme={MyTheme}>
+    <NavigationContainer linking={linking} ref={navigationRef} theme={MyTheme}>
       <Stack.Navigator
-        initialRouteName="SplashScreen"
-        screenOptions={{headerShown: false}}>
+        screenOptions={{headerShown: false}}
+        initialRouteName="SplashScreen">
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="Auth" component={AuthStack} />
         <Stack.Screen name="App" component={Appstack} />
-        <Stack.Screen name="Auth" component={Authstack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -21,7 +21,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import {
   SingerImageComponent,
-  SingerImageComponentBottom,
 } from './SongComponents';
 
 const SongDetail = () => {
@@ -124,7 +123,7 @@ const SongDetail = () => {
               {data?.name}
             </Text>
             <View className="flex flex-row items-center mt-[2vh]">
-              <SingerImageComponent singerImage={data.singerImage} />
+              <SingerImageComponent singerImage={data.singerImage!} />
               <Text className="text-white font-[RadioCanadaBig-Bold] text-[14px] ml-3">
                 {data?.singer}
               </Text>
@@ -137,7 +136,6 @@ const SongDetail = () => {
             {data?.released}
           </Text>
 
-          <SingerImageComponentBottom singerImage={data?.singerImage} />
         </View>
 
         <View className="w-full p-3 bg-white mt-[1vh]">
