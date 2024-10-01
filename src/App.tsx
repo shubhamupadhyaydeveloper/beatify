@@ -27,11 +27,11 @@ function App(): React.JSX.Element {
   useEffect(() => {
       requestPermission()
       setCategory()
-      if(Platform.OS === 'android') {
-         batteryOptimization()
-        //  powerManager()
-      }
-  })
+      // if(Platform.OS === 'android') {
+      //    batteryOptimization()
+      //   //  powerManager()
+      // }
+  },[])
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
