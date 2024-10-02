@@ -30,7 +30,7 @@ const SharedButton = ({
       disabled={isSubmitting}
       style={{
         width: btnWidth ?? width * 0.8,
-        height: height * 0.07,
+        height: height * 0.065,
         borderRadius: radius ?? 15,
         backgroundColor: bgColor ?? '#21c856',
         justifyContent: 'center',

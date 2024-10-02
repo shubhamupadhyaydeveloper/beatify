@@ -8,9 +8,16 @@ import ShowNotification from './notification/Notification';
 import { requestPermission } from './notification/nofitcationPermission';
 import '../src/notification/notificatonListener'
 import { setCategory } from './notification/NotificationInitial';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 function App(): React.JSX.Element {
   const [isReady, setIsReady] = useState(false);
+
+  GoogleSignin.configure({
+    webClientId:
+      '258676774788-5k7ipu9prkpjuv6jdmgq5nohfd3i4e3b.apps.googleusercontent.com',
+      forceCodeForRefreshToken : true
+  });
 
   useEffect(() => {
       requestPermission()

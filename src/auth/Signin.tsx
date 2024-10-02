@@ -6,7 +6,7 @@ import {
   KeyboardTypeOptions,
   TouchableOpacity,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, {useCallback, useRef} from 'react';
 import {primaryColor, secondaryColor} from 'src/constant/color';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {logo} from 'src/constant/image';
@@ -46,21 +46,22 @@ const SignIn = () => {
     resolver: zodResolver(SignInTypes)
   });
 
-  const handleFormSubmit = async (data: FieldValues) => {
+  const handleFormSubmit = useCallback(async (data: FieldValues) => {
     try {
     const accessToken = await loginApi(data.email,data.password)
      if(accessToken) {
          showNofitication('user login success 🔥', primaryColor, 'white');
      }
     } catch (error: any) {
-      showNofitication(error?.message, '#C80036', 'white', 5);
+      showNofitication('email/password is not correct or choose google for signin', '#C80036', 'white', 5);
+      console.log(error?.message)
     } finally {
       reset();
     }
-  };
+  },[])
 
   const onLinkPress = () => {
-    navigation.navigate('EmailVerification',{email : "hello"});
+    navigation.navigate('SignUp');
   };
 
   const handlePress = () => {
@@ -119,6 +120,7 @@ const SignIn = () => {
       </View>
       <View>
         <OAuth
+          authType='Signin'
           NormalText="Not a Member?"
           LinkText="Register Now"
           onLinkPress={onLinkPress}

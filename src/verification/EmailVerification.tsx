@@ -14,7 +14,6 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from 'src/pages/Header';
 import LottieView from 'lottie-react-native';
 import SharedButton from '@shared/Button';
-import useGlobalState from 'src/store/globalState';
 import {
   NavigationProp,
   RouteProp,

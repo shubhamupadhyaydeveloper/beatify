@@ -22,6 +22,20 @@ export async function loginApi(email: string, password: string) {
   return accessToken;
 }
 
+export const signupApi = async (username:string,email:string,password:string) => {
+  try {
+     const {data} = await axios.post(`${port}/auth/signup`,{
+      username : username,
+      email : email,
+      password : password,
+      method : "manual"
+     })
+     return data
+  } catch (error:any) {
+    console.log("signupApi error",error?.message)
+  }
+}
+
 export const refreshTokenapi = async () => {
   try {
     const refreshToken = mmkyStroage.getItem('refreshToken');

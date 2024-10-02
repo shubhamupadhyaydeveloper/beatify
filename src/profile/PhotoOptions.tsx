@@ -1,5 +1,5 @@
 import {View, Text, useWindowDimensions, TouchableOpacity} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -87,7 +87,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
      handleImagePress()
   }
 
-  const takeImage = () => {
+  const takeImage = useCallback(() => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
@@ -103,7 +103,7 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
       .finally(() => {
         closeBox()
       })
-  };
+  },[])
 
   return (
     <GestureHandlerRootView>

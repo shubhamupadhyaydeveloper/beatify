@@ -7,18 +7,21 @@ import React from 'react';
 import {primaryColor, secondaryColor, tertiaryColor} from 'src/constant/color';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import useGlobalState from 'src/store/globalState';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { HomepageNavigationProp } from 'src/types/navigationProps';
 import { githubLink } from 'src/constant/text';
+import { mmkyStroage } from 'src/store/mmkv';
+import { resetAndNavigate } from 'src/navigation/navigaionutils';
 
 const CustomDrawerContent = ({props}: {props: any}) => {
   const {width, height} = useWindowDimensions();
-  const {setLoggenIn} = useGlobalState()
   const navigation = useNavigation<NavigationProp<HomepageNavigationProp>>()
 
   const handleOpenUrl = () => {
-     
+     mmkyStroage.setItem('accessToken','')
+     mmkyStroage.setItem('refreshToken','')
+     mmkyStroage.setItem('userId','')
+     resetAndNavigate('Auth')
   }
 
   return (
@@ -53,7 +56,10 @@ const CustomDrawerContent = ({props}: {props: any}) => {
               size={27}
               color={secondaryColor}
             />
-            <TouchableOpacity activeOpacity={0.7} className="" onPress={() => setLoggenIn(false)}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              className=""
+              onPress={handleOpenUrl}>
               <Text className="font-[RadioCanadaBig-Regular] text-[15px] text-white">
                 Develper Info
               </Text>

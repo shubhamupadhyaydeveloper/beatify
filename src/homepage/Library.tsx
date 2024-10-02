@@ -58,12 +58,12 @@ const Library = () => {
     };
   });
 
-  const runAnimation = () => {
+  const runAnimation = useCallback(() => {
     sharedOpacity.value = withTiming(1, {duration: 300});
-  };
-  const reverseAnimation = () => {
+  },[]);
+  const reverseAnimation = useCallback(() => {
     sharedOpacity.value = withTiming(0, {duration: 300});
-  };
+  },[])
 
   return (
     <>

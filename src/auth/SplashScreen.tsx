@@ -5,7 +5,7 @@ import {
   StatusBar,
   Linking,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {setNavColor} from 'src/hooks/NavColor';
 import {resetAndNavigate} from 'src/navigation/navigaionutils';
 import Animated, {
@@ -37,36 +37,42 @@ const SplashScreen = () => {
   const initialRender = useSharedValue(0);
   const {showNofitication} = notificationState();
 
-  const checkToken = () => {
-    if (accessToken) {
-      const decodedAccessToken = jwtDecode<Decoded>(accessToken);
-      const decodedRefreshToken = jwtDecode<Decoded>(refreshToken!);
+  const checkToken = useMemo(
+    () => () => {
+      if (accessToken) {
+        const decodedAccessToken = jwtDecode<Decoded>(accessToken);
+        const decodedRefreshToken = jwtDecode<Decoded>(refreshToken!);
 
-      const currentTime = Date.now() / 1000;
+        const currentTime = Date.now() / 1000;
 
-      if (decodedRefreshToken?.exp < currentTime) {
-        resetAndNavigate('Auth');
-        showNofitication('Session Expiry,Please Login', primaryColor, 'white');
-        return false;
-      }
-
-      if (decodedAccessToken?.exp < currentTime) {
-        try {
-          refreshTokenapi();
-        } catch (error: any) {
-          console.log('error in refresh token', error?.message);
+        if (decodedRefreshToken?.exp < currentTime) {
+          resetAndNavigate('Auth');
+          showNofitication(
+            'Session Expiry,Please Login',
+            primaryColor,
+            'white',
+          );
           return false;
         }
-      }
-      resetAndNavigate('App');
-      return true;
-    } else {
-      resetAndNavigate('Auth');
-      return false;
-    }
-  };
 
-  const handleDeepLink = async (event: any, deepLinkType: string) => {
+        if (decodedAccessToken?.exp < currentTime) {
+          try {
+            refreshTokenapi();
+          } catch (error: any) {
+            console.log('error in refresh token', error?.message);
+            return false;
+          }
+        }
+        resetAndNavigate('App');
+        return true;
+      } else {
+        resetAndNavigate('Auth');
+        return false;
+      }
+    },
+    [],
+  );
+  const handleDeepLink = useCallback(async (event: any, deepLinkType: string) => {
     const tokenValid = checkToken();
     if (!tokenValid) return;
 
@@ -86,7 +92,7 @@ const SplashScreen = () => {
         handleDefaultCase(deepLinkType);
         break;
     }
-  };
+  },[])
 
   const handleNoUrlCase = (deepLinkType: string) => {
     if (deepLinkType !== 'RESUME') {

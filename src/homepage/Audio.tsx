@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity, useWindowDimensions} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
-import React from 'react';
+import React, { useCallback } from 'react';
 import {secondaryColor, tertiaryColor} from 'src/constant/color';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -10,7 +10,8 @@ type prop = {
 
 const Audio = ({handleAudioUrl}:prop) => {
   const {width,height} = useWindowDimensions()
-  const handleAudioSelect = async () => {
+
+  const handleAudioSelect = useCallback(async () => {
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.audio],
@@ -26,7 +27,7 @@ const Audio = ({handleAudioUrl}:prop) => {
         console.error('AudioPicker Error: ', err);
       }
     }
-  };
+  },[])
 
   return (
     <View>

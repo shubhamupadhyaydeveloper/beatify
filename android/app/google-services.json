@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1016372025142",
-    "project_id": "beatify-d10d6",
-    "storage_bucket": "beatify-d10d6.appspot.com"
+    "project_number": "258676774788",
+    "project_id": "beatify-25774",
+    "storage_bucket": "beatify-25774.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1016372025142:android:bda5df75c244e0a642c597",
+        "mobilesdk_app_id": "1:258676774788:android:fb653f8a6f06abeb45afd1",
         "android_client_info": {
-          "package_name": "com.app"
+          "package_name": "com.beatify"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBKuy4jjorXLptFspquUmPzTXjLHkBU9XA"
+          "current_key": "AIzaSyCF5DuZPSSmZKG8tPbIXCheU59NXKK1h_8"
         }
       ],
       "services": {

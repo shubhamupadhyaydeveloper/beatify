@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, Button, Image, StyleSheet, Alert, TouchableOpacity, Text} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
 const UseCamera: React.FC = () => {
-  const pickImage = () => {
+  const pickImage = useCallback(() => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
@@ -11,7 +11,7 @@ const UseCamera: React.FC = () => {
     }).then(image => {
       console.log(image);
     });
-  }
+  },[]);
   return (
     <View>
        <TouchableOpacity onPress={pickImage}>

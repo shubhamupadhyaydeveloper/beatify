@@ -12,7 +12,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DocumentPicker from 'react-native-document-picker';
 import {useForm, Controller, FieldValues} from 'react-hook-form';
@@ -41,7 +41,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {categoryData} from 'src/constant/mockdata';
-import {isBuffer} from 'lodash';
 
 const Create = () => {
   const navigation = useNavigation();
@@ -61,7 +60,7 @@ const Create = () => {
     handleSubmit,
   } = useForm();
 
-  const handlePress = async () => {
+  const handlePress = useCallback(async () => {
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
@@ -75,7 +74,7 @@ const Create = () => {
         console.log('User canceled audio selection');
       }
     }
-  };
+  },[])
 
   const dropDownStyle = useAnimatedStyle(() => {
     return {
@@ -95,33 +94,36 @@ const Create = () => {
 
   const handleCategory = (category: string) => {
     SetLocalState(prev => ({...prev, category}));
-    closeDropDown()
+    closeDropDown();
   };
 
-  const handleFormSubmit = (data: FieldValues) => {
-    try {
-      if (
-        !data.title ||
-        !data.description ||
-        !data.singer ||
-        !localState.audioUrl ||
-        !localState.imgUrl ||
-        !localState.category
-      ) {
-        showNofitication('All fields are required');
+  const handleFormSubmit = useMemo(
+    () => (data: FieldValues) => {
+      try {
+        if (
+          !data.title ||
+          !data.description ||
+          !data.singer ||
+          !localState.audioUrl ||
+          !localState.imgUrl ||
+          !localState.category
+        ) {
+          showNofitication('All fields are required');
+        }
+      } catch (error: any) {
+        console.log(error, 'error in create form submit');
+      } finally {
+        reset();
+        SetLocalState(prev => ({
+          ...prev,
+          category: '',
+          imgUrl: '',
+          audioUrl: '',
+        }));
       }
-    } catch (error: any) {
-      console.log(error, 'error in create form submit');
-    } finally {
-      reset();
-      SetLocalState(prev => ({
-        ...prev,
-        category: '',
-        imgUrl: '',
-        audioUrl: '',
-      }));
-    }
-  };
+    },
+    [],
+  );
 
   const getAudioUrl = (value: string) => {
     SetLocalState(prev => ({...prev, audioUrl: value}));
@@ -134,7 +136,7 @@ const Create = () => {
     }, 10);
   };
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     if (optionVisible) {
       closeDropDown();
     } else {
@@ -144,13 +146,12 @@ const Create = () => {
       });
       setOptionVisible(true);
     }
-  };
+  },[])
 
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      {/* {isSubmitting && <AppLoader />} */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView className="px-5 mt-[2vh] h-full ">
           <View className="flex flex-row items-center">
