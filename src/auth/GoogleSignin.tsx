@@ -23,6 +23,7 @@ export const signUpWithGoogle = async () => {
     await GoogleSignin.hasPlayServices();
     await GoogleSignin.signOut();
     const {data} = await GoogleSignin.signIn();
+    const mobileToken = mmkyStroage.getItem("mobileToken")
     const {
       data: {accessToken, refreshToken, userId},
     } = await axios.post<loginApiType>(`${port}/auth/signup`, {
@@ -30,7 +31,7 @@ export const signUpWithGoogle = async () => {
       email: data!.user.email,
       password: data!.user.id,
       method: 'google',
-      userDeviceToken: mmkyStroage.getItem("mobileToken"),
+      userDeviceToken: mobileToken ,
     });
 
 
@@ -44,6 +45,6 @@ export const signUpWithGoogle = async () => {
     return accessToken
 
   } catch (error: any) {
-    // console.log('error in signup', error.message);
+    console.log('error in signup', error.response.data);
   }
 };

@@ -35,10 +35,10 @@ const OAuth = ({NormalText, LinkText, onLinkPress, authType}: props) => {
       }
     } else if (authType === 'Signup') {
       const response = await signUpWithGoogle();
-      if(!response) {
-         showNofitication('user already registered 😒', '#C80036', 'white',0);
+      if(response) {
+        showNofitication('user signup success 🔥', primaryColor, 'white', 0);
       } else {
-          showNofitication('user signup success 🔥', primaryColor, 'white', 0);
+        showNofitication('user already registered 😒', '#C80036', 'white',0);
       }
     }
   };
