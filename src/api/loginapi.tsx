@@ -3,6 +3,7 @@ import {loginApiType, refreshApiType} from 'src/types/signin';
 import {port} from './client';
 import {resetAndNavigate} from 'src/navigation/navigaionutils';
 import {mmkyStroage} from 'src/store/mmkv';
+import { Alert } from 'react-native';
 
 export async function loginApi(email: string, password: string) {
   const {
@@ -23,17 +24,14 @@ export async function loginApi(email: string, password: string) {
 }
 
 export const signupApi = async (username:string,email:string,password:string) => {
-  try {
-     const {data} = await axios.post(`${port}/auth/signup`,{
-      username : username,
-      email : email,
-      password : password,
-      method : "manual"
-     })
+     const {data} = await axios.post(`${port}/auth/signup`, {
+       username: username,
+       email: email,
+       password: password,
+       method: 'manual',
+       userDeviceToken: mmkyStroage.getItem('mobileToken'),
+     });
      return data
-  } catch (error:any) {
-    console.log("signupApi error",error?.message)
-  }
 }
 
 export const refreshTokenapi = async () => {
@@ -52,6 +50,6 @@ export const refreshTokenapi = async () => {
 
     return accessToken;
   } catch (err: any) {
-    console.log('error in refresh Tokenapi', err?.message);
+    Alert.alert('error in refresh Tokenapi', err?.message);
   }
 };

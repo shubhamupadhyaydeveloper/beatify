@@ -40,5 +40,4 @@ export type loginApiType = {
 export type refreshApiType = {
   refreshToken: string;
   accessToken: string;
-  message: string
 };

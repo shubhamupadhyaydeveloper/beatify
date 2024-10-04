@@ -72,47 +72,53 @@ const SplashScreen = () => {
     },
     [],
   );
-  const handleDeepLink = useCallback(async (event: any, deepLinkType: string) => {
-    const tokenValid = checkToken();
-    if (!tokenValid) return;
 
-    const {url} = event;
-    if (!url) {
-      handleNoUrlCase(deepLinkType);
-      return;
-    }
+  const handleDeepLink = useCallback(
+    async (event: any, deepLinkType: string) => {
+      const tokenValid = checkToken();
 
-    const {type, id} = extractTypeAndId(url);
+      if (!tokenValid) return;
 
-    switch (type) {
-      case 'song':
-        await getReelDataApi(id, deepLinkType);
-        break;
-      default:
-        handleDefaultCase(deepLinkType);
-        break;
-    }
-  },[])
+      const {url} = event;
+
+      if (!url) {
+        handleNoUrlCase(deepLinkType);
+        return;
+      }
+
+      const {type, id} = extractTypeAndId(url);
+
+      switch (type) {
+        case 'song':
+          await getReelDataApi(id, deepLinkType);
+          break;
+        default:
+          handleDefaultCase(deepLinkType);
+          break;
+      }
+    },
+    [],
+  );
 
   const handleNoUrlCase = (deepLinkType: string) => {
     if (deepLinkType !== 'RESUME') {
-      resetAndNavigate('BottomTab');
+      resetAndNavigate('App');
     }
   };
 
   const handleDefaultCase = (deepLinkType: string) => {
     if (deepLinkType !== 'RESUME') {
-      resetAndNavigate('BottomTab');
+      resetAndNavigate('App');
     }
   };
 
-  // useEffect(() => {
-  //   Linking.getInitialURL().then(url => {
-  //     handleDeepLink({url}, 'CLOSE');
-  //   });
+  const deepLinking = useCallback(() => {
+    Linking.getInitialURL().then(url => {
+      handleDeepLink({url}, 'CLOSE');
+    });
 
-  //   Linking.addEventListener('url', event => handleDeepLink(event, 'RESUME'));
-  // }, []);
+    Linking.addEventListener('url', event => handleDeepLink(event, 'RESUME'));
+  }, []);
 
   useEffect(() => {
     initialRender.value = withSpring(1, {
@@ -121,7 +127,9 @@ const SplashScreen = () => {
       damping: 10,
     });
 
-    const timeOut = setTimeout(() => checkToken(), 2000);
+    const timeOut = setTimeout(() => {
+      deepLinking();
+    }, 2000);
     return () => clearTimeout(timeOut);
   }, []);
 

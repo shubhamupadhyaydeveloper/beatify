@@ -7,11 +7,11 @@ import { AuthStack } from './authstack';
 import SplashScreen from 'src/auth/SplashScreen';
 
 const config = {
-  screens : {
-     Song : 'share/song/:songId',
-     Playlist : 'share/playlist/:playlistId'
-  }
-}
+  screens: {
+    SongDetail: '/sharelink/song/:id',
+    // UserDetail : '/sharelink/user/:id'
+  },
+};
 
 type stackScreenType = {
   SplashScreen: undefined;
@@ -20,8 +20,8 @@ type stackScreenType = {
 };
 
 const linking = {
-  prefixes: ['http://localhost:3000', ''],
-  config
+  prefixes: ['http://localhost:3000', 'http://192.168.1.110:3000'],
+  config,
 };
 
 const StackNavigator = () => {

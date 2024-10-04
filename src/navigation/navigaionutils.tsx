@@ -3,7 +3,7 @@ import { CommonActions, createNavigationContainerRef, StackActions } from "@reac
 
 export const navigationRef = createNavigationContainerRef()
 
-export const navigation = (routeName : string,params?: object) => {
+export const navigate = (routeName : string,params?: object) => {
     navigationRef.isReady()
     if(navigationRef.isReady()){
         navigationRef.dispatch(CommonActions.navigate(routeName,params))

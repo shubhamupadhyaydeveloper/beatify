@@ -1,17 +1,17 @@
-import { navigation, resetAndNavigate } from "src/navigation/navigaionutils";
+import { navigate, resetAndNavigate } from "src/navigation/navigaionutils";
 import { appAxios } from "./apiIntersepters"
 import { port } from "./client"
+import { Alert } from "react-native";
+import { mmkyStroage } from "src/store/mmkv";
 
 
 export const getReelDataApi = async (reelId :string,deepLinkType : string) => {
      try {
-        const {data} = await appAxios.post(`${port}/public/reel`, {
+
+        const {data} = await appAxios.post(`/public/reel`, {
           songId : reelId
         });
 
-         if (deepLinkType !== 'RESUME') {
-           resetAndNavigate('App');
-         }
 
         const createData = {
             title : data?.title,
@@ -20,11 +20,21 @@ export const getReelDataApi = async (reelId :string,deepLinkType : string) => {
             released : data?.createdAt.toString().slice(0, 15)
         }
          
-        navigation('SongDetail',{
+        navigate('SongDetail',{
             data : createData,
             index :0
         });
      } catch (err:any) {
-        console.log('error in getReeldata api',err?.message)
+        Alert.alert('error in getreeldataapi', err?.message);
      }
+}
+
+export const getUserDetail = async () => {
+  try {
+    const userId = mmkyStroage.getItem("userId")
+    const userData = await appAxios.post('/user/userdetail',{userId : userId})
+    return userData
+  } catch (error:any) {
+    Alert.alert("error in get userdetail",error?.message)
+  }
 }

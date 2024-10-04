@@ -9,6 +9,8 @@ import { requestPermission } from './notification/nofitcationPermission';
 import '../src/notification/notificatonListener'
 import { setCategory } from './notification/NotificationInitial';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import { mmkyStroage } from './store/mmkv';
+import { getUserDetail } from './api/inappapi';
 
 function App(): React.JSX.Element {
   const [isReady, setIsReady] = useState(false);
