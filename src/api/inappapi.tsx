@@ -8,10 +8,9 @@ import { mmkyStroage } from "src/store/mmkv";
 export const getReelDataApi = async (reelId :string,deepLinkType : string) => {
      try {
 
-        const {data} = await appAxios.post(`/public/reel`, {
+        const {data} = await appAxios.post(`/public/song`, {
           songId : reelId
         });
-
 
         const createData = {
             title : data?.title,
@@ -21,8 +20,7 @@ export const getReelDataApi = async (reelId :string,deepLinkType : string) => {
         }
          
         navigate('SongDetail',{
-            data : createData,
-            index :0
+            id : data._id,
         });
      } catch (err:any) {
         Alert.alert('error in getreeldataapi', err?.message);

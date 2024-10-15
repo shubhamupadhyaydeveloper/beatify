@@ -22,13 +22,8 @@ export type HomepageNavigationProp = {
   ActualPage: undefined;
   Artist: {data: {name: string; img: string}};
   SongDetail: {
-    data: {
-      name: string;
-      image: string;
-      singer: string;
-      released?: string;
-      singerImage?: string | string[];
-    };
+  id : string 
+  data : {any : any}
   };
   ProfilePage: undefined;
   EditProfile: undefined;

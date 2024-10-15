@@ -40,7 +40,7 @@ const ForgetPassword = () => {
   const handleForgetPassword = (data: FieldValues) => {
     console.log(data);
     try {
-        navigation.navigate("EmailVerification")
+        // navigation.navigate("EmailVerification")
     } catch (error:any) {
         console.log(error?.message)
     } finally {

@@ -162,9 +162,10 @@ const ActualHomepage = () => {
               ItemSeparatorComponent={() => <View style={{width: 15}}></View>}
               renderItem={({item}) => (
                 <CustomTouchableOpacity
-                  onPress={() =>
-                    homeNavigation.navigate('SongDetail', {data: item})
-                  }>
+                  // onPress={() =>
+                  //   homeNavigation.navigate('SongDetail', {data: item})
+                  // }
+                  >
                   <View className="flex" key={item.name}>
                     <LazyImage
                       image={item.image}

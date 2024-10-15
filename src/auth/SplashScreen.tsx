@@ -77,9 +77,11 @@ const SplashScreen = () => {
     async (event: any, deepLinkType: string) => {
       const tokenValid = checkToken();
 
+
       if (!tokenValid) return;
 
       const {url} = event;
+
 
       if (!url) {
         handleNoUrlCase(deepLinkType);

@@ -3,13 +3,25 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Appstack from './tab'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { navigationRef } from './navigaionutils';
-import { AuthStack } from './authstack';
+
 import SplashScreen from 'src/auth/SplashScreen';
+import Authstack from './AuthStack';
 
 const config = {
   screens: {
-    SongDetail: '/sharelink/song/:id',
-    // UserDetail : '/sharelink/user/:id'
+    App: {
+      screens: {
+        MainTabs: {
+          screens: {
+            Home: {
+              screens: {
+                SongDetail : "/song/:id"
+              },
+            },
+          },
+        },
+      },
+    },
   },
 };
 
@@ -20,7 +32,7 @@ type stackScreenType = {
 };
 
 const linking = {
-  prefixes: ['http://localhost:3000', 'http://192.168.1.110:3000'],
+  prefixes: ['beatify-9fmh.onrender://', 'https://beatify-9fmh.onrender.com'],
   config,
 };
 
@@ -41,7 +53,7 @@ const StackNavigator = () => {
         screenOptions={{headerShown: false}}
         initialRouteName="SplashScreen">
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Auth" component={AuthStack} />
+        <Stack.Screen name="Auth" component={Authstack} />
         <Stack.Screen name="App" component={Appstack} />
       </Stack.Navigator>
     </NavigationContainer>

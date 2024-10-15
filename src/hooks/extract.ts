@@ -7,7 +7,7 @@ export const extractTypeAndId = (url: string): {type: string; id: string} => {
   const reelPattern1 =
     /^http:\/\/localhost:3000\/sharelink\/song\/([a-f\d]{24})$/;
   const reelPattern2 =
-    /^http:\/\/192.168.1.110:3000\/sharelink\/song\/([a-f\d]{24})$/;
+    /^https:\/\/beatify-9fmh.onrender.com\/sharelink\/song\/([a-f\d]{24})$/;
 //   const reelPattern2 = /^reelzzz:\/\/share\/reel\/([a-f\d]{24})$/;
 //   const userPattern1 =
 //     /^http:\/\/localhost:3000\/share\/user\/([a-zA-Z0-9_]+)$/;

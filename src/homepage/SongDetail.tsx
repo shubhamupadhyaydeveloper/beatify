@@ -25,10 +25,12 @@ import {
 
 const SongDetail = () => {
   const route = useRoute<RouteProp<HomepageNavigationProp, 'SongDetail'>>();
-  const {data} = route.params;
+  const {id} = route.params;
   const {width, height} = useWindowDimensions();
   const navigation = useNavigation();
   const scrollY = useSharedValue(0);
+
+  console.log(id)
 
   const scrollHandler = useAnimatedScrollHandler(e => {
     scrollY.value = e.contentOffset.y;
@@ -69,7 +71,10 @@ const SongDetail = () => {
         backgroundColor="rgba(0,0,0,0.5)"
         barStyle="default"
       />
-      <Animated.View
+      <Text className='mt-5'>
+         Hi this is your {id}
+      </Text>
+      {/* <Animated.View
         style={[
           {
             position: 'absolute',
@@ -97,9 +102,9 @@ const SongDetail = () => {
             {data?.name}
           </Text>
         </Animated.View>
-      </Animated.View>
+      </Animated.View> */}
 
-      <Animated.ScrollView
+      {/* <Animated.ScrollView
         scrollEventThrottle={16}
         stickyHeaderIndices={[2]}
         onScroll={scrollHandler}
@@ -216,7 +221,7 @@ const SongDetail = () => {
             This is scrollable
           </Text>
         </View>
-      </Animated.ScrollView>
+      </Animated.ScrollView> */}
     </View>
   );
 };
