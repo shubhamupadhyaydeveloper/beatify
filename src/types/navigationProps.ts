@@ -22,15 +22,21 @@ export type HomepageNavigationProp = {
   ActualPage: undefined;
   Artist: {data: {name: string; img: string}};
   SongDetail: {
-  id : string 
-  data : {any : any}
+    id: string;
+    data: {
+      name: string;
+      image: string;
+      singerImage: string;
+      singer: string;
+      released : string
+    };
   };
   ProfilePage: undefined;
   EditProfile: undefined;
   Followers: undefined;
   Following: undefined;
   CameraPage: undefined;
-  ProfileImage : {image : string,tagName : string};
+  ProfileImage: {image: string; tagName: string};
 };
 
 export type ExploreNavigationProp = {
@@ -51,6 +57,7 @@ export type LibraryNavigationTypes = {
   CreatePlaylist : undefined;
   EditPlaylist : undefined;
   AddSongs : undefined;
+  AddToPlaylist : undefined;
 };
 
 export type CreateNavigationTypes = {

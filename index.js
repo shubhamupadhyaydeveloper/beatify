@@ -10,12 +10,13 @@ import messaging from '@react-native-firebase/messaging';
 import {displayNotification} from 'src/notification/NotificationInitial';
 
 async function onMessageReceived(message) {
-  const {title, description, imageUrl} = message.data;
+  const {title, description, imageUrl,category,actionTitle} = message.data;
   await displayNotification({
     title,
     message: description,
     image: imageUrl,
-    categoryId: 'default',
+    categoryId: category,
+    actionTitle : actionTitle
   });
 }
 

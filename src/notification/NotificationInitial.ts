@@ -5,6 +5,7 @@ type displayType = {
   message: string;
   image: string;
   categoryId: string;
+  actionTitle : string
 };
 
 export const displayNotification = async ({
@@ -12,6 +13,7 @@ export const displayNotification = async ({
   message,
   image,
   categoryId,
+  actionTitle
 }: displayType) => {
    const channelId = await notifee.createChannel({
      id  : "default",
@@ -26,7 +28,7 @@ export const displayNotification = async ({
         channelId : channelId, onlyAlertOnce : true,
         actions : [
            {
-             title : "okay",
+             title : actionTitle || 'okay',
              pressAction : {
                id : categoryId,
                launchActivity : "default"
@@ -48,10 +50,20 @@ export const setCategory = async () => {
          actions : [
             {
                id : 'see-profile',
-               title : 'okay',
+               title : 'Profile',
                foreground : true
             }
          ]
       },
+      {
+         id : 'default',
+         actions : [
+            {
+               id : "Go to app",
+               title : '',
+               foreground : true
+            }
+         ]
+      }
    ])
 }

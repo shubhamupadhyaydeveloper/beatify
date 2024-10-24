@@ -24,6 +24,7 @@ import CustomTouchableOpacity from '@shared/TouchableOpacity';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import OcticonsIcon from 'react-native-vector-icons/Octicons';
 import CustomModal, {CustomModalRef} from '@shared/CustomModal';
+import { navigate } from 'src/navigation/navigaionutils';
 
 const PlaylistPage = () => {
   const {width, height} = useWindowDimensions();
@@ -181,7 +182,7 @@ const PlaylistPage = () => {
             Lets start building your playlist.
           </Text>
           <View style={{width: ScreenWidth * 0.6}}>
-            <CustomTouchableOpacity>
+            <CustomTouchableOpacity onPress={() => navigate('AddToPlaylist')}>
               <View className="  bg-white items-center justify-center flex py-2  rounded-full">
                 <Text className="text-black font-[RadioCanadaBig-Bold] text-[16px]">
                   Add to this playlist
@@ -191,9 +192,63 @@ const PlaylistPage = () => {
           </View>
         </View>
 
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+        <View
+          style={{width: ScreenWidth * 0.7, marginTop: ScreenWidth * 0.1}}
+          className="mx-auto">
+          <Text className="text-white font-[RadioCanadaBig-Bold] text-[22px] text-center">
+            Your liked songs will appear here
+          </Text>
+        </View>
+
         <CustomModal ref={testref} userSnapPoint={[200]}>
           <View className="px-4 mt-4">
-            <CustomTouchableOpacity onPress={() => navigation.navigate("EditPlaylist")}>
+            <CustomTouchableOpacity
+              onPress={() => {
+                navigation.navigate('EditPlaylist');
+                testref.current?.toggleVisible();
+              }}>
               <View className="flex flex-row items-center">
                 <OcticonsIcon name="pencil" color={'#bdbdbc'} size={25} />
                 <Text className="text-white text-[18px] font-[RadioCanadaBig-Regular] ml-5">

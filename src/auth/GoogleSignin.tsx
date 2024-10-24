@@ -31,7 +31,7 @@ export const signUpWithGoogle = async () => {
       email: data!.user.email,
       password: data!.user.id,
       method: 'google',
-      userDeviceToken: mobileToken ,
+      // userDeviceToken: mobileToken ,
     });
 
 

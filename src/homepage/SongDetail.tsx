@@ -5,6 +5,7 @@ import {
   useWindowDimensions,
   TouchableOpacity,
   Image,
+  Share
 } from 'react-native';
 import React from 'react';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
@@ -19,18 +20,15 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-import {
-  SingerImageComponent,
-} from './SongComponents';
+import {SingerImageComponent} from './SongComponents';
 
 const SongDetail = () => {
   const route = useRoute<RouteProp<HomepageNavigationProp, 'SongDetail'>>();
-  const {id} = route.params;
+  const {id, data} = route.params;
   const {width, height} = useWindowDimensions();
   const navigation = useNavigation();
   const scrollY = useSharedValue(0);
 
-  console.log(id)
 
   const scrollHandler = useAnimatedScrollHandler(e => {
     scrollY.value = e.contentOffset.y;
@@ -71,10 +69,7 @@ const SongDetail = () => {
         backgroundColor="rgba(0,0,0,0.5)"
         barStyle="default"
       />
-      <Text className='mt-5'>
-         Hi this is your {id}
-      </Text>
-      {/* <Animated.View
+      <Animated.View
         style={[
           {
             position: 'absolute',
@@ -102,9 +97,9 @@ const SongDetail = () => {
             {data?.name}
           </Text>
         </Animated.View>
-      </Animated.View> */}
+      </Animated.View>
 
-      {/* <Animated.ScrollView
+      <Animated.ScrollView
         scrollEventThrottle={16}
         stickyHeaderIndices={[2]}
         onScroll={scrollHandler}
@@ -119,14 +114,27 @@ const SongDetail = () => {
             <Image
               className="sticky top-[5px] "
               source={{uri: data.image}}
-              style={{width: width * 0.5, height: height * 0.25,}}
-              
+              style={{width: width * 0.5, height: height * 0.25}}
             />
           </Animated.View>
           <View className="px-5  mt-[2vh]">
-            <Text className="text-white font-[RadioCanadaBig-Bold] text-[25px]">
-              {data?.name}
-            </Text>
+            <View className="flex flex-row items-center gap-[20px]">
+              <Text className="text-white font-[RadioCanadaBig-Bold] text-[25px]">
+                {data?.name}
+              </Text>
+              <View>
+                <TouchableOpacity activeOpacity={.85} onPress={() => {
+                   Share.share({
+                     message:
+                       'https://beatify-9fmh.onrender.com/sharelink/song/66f524a090bf4c3510c484d2',
+                       title : 'share this song with your friends'
+                   });
+                }}>
+
+                <AntDesignIcon name="sharealt" color={'white'} size={25} />
+                </TouchableOpacity>
+              </View>
+            </View>
             <View className="flex flex-row items-center mt-[2vh]">
               <SingerImageComponent singerImage={data.singerImage!} />
               <Text className="text-white font-[RadioCanadaBig-Bold] text-[14px] ml-3">
@@ -140,14 +148,9 @@ const SongDetail = () => {
           <Text className="text-white font-[RadioCanadaBig-Regular] text-[18px] mb-[2vh]">
             {data?.released}
           </Text>
-
         </View>
 
-        <View className="w-full p-3 bg-white mt-[1vh]">
-          <Text className="text-black">This is fixed</Text>
-        </View>
-
-        <View>
+        <View className="px-[20px]">
           <Text className="mb-[2vh] font-[RadioCanadaBig-Bold] text-[17px]">
             This is scrollable
           </Text>
@@ -221,7 +224,7 @@ const SongDetail = () => {
             This is scrollable
           </Text>
         </View>
-      </Animated.ScrollView> */}
+      </Animated.ScrollView>
     </View>
   );
 };

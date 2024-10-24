@@ -10,6 +10,7 @@ import CreatePlaylist from './CreatePlaylist'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AddSongs from 'src/homepage/AddSongs'
 import EditPlaylist from 'src/homepage/EditPlaylist'
+import AddToPlayList from './AddToPlayList'
 
 const LibraryIndex = () => {
   const Stack = createNativeStackNavigator<LibraryNavigationTypes>()
@@ -48,6 +49,12 @@ const LibraryIndex = () => {
         <Stack.Screen
          name='EditPlaylist'
          component={EditPlaylist}
+         options={{headerShown : false}}
+        />
+
+        <Stack.Screen 
+         name='AddToPlaylist'
+         component={AddToPlayList}
          options={{headerShown : false}}
         />
     </Stack.Navigator>

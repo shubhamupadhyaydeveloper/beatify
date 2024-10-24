@@ -6,14 +6,15 @@ import {
   ExploreNavigationProp,
   LibraryNavigationTypes,
 } from 'src/types/navigationProps';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EditPlaylist = () => {
   const navigation = useNavigation<NavigationProp<LibraryNavigationTypes>>();
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>hello</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

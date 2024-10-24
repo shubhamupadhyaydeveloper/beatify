@@ -1,4 +1,4 @@
-import {View, Text, useWindowDimensions, TouchableOpacity} from 'react-native';
+import {View, Text, useWindowDimensions, TouchableOpacity, Platform, PermissionsAndroid} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Animated, {
   useSharedValue,
@@ -33,7 +33,6 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
   const [visible, setVisible] = useState(false);
   const boxLayout = useRef({x: 0, y: 0, width: 0, height: 0});
   const optionScale = useSharedValue(0.9);
-  const optionOpacity = useSharedValue(0);
 
 
   useEffect(() => {
@@ -87,23 +86,43 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
      handleImagePress()
   }
 
-  const takeImage = useCallback(() => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true,
-    })
-      .then(image => {
-        setImage(image.path);
-        
-      })
-      .catch(err => {
-        console.log('Error opening camera: ', err);
-      })
-      .finally(() => {
-        closeBox()
-      })
+  const requestCameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'This app needs access to your camera',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Camera permission denied');
+          return false;
+        } else {
+          console.log('you can use the camera')
+        }
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const takeImage = useCallback(async () => {
+    await requestCameraPermission()
+    const response = await ImagePicker.openCamera({
+      width: 300, 
+      height: 400, 
+      cropping: false,
+    });
+    setImage(response.path)
   },[])
+
 
   return (
     <GestureHandlerRootView>
@@ -182,4 +201,4 @@ const PhotoOptions = ({onClose,setImage,handleImagePress}: prop) => {
   );
 };
 
-export default PhotoOptions;
+export default PhotoOptions
